@@ -3,13 +3,17 @@
     <header class="menu">
       <div class="container">
         <div class="menu-logo">
-          <a @click="actionMenu">
+          <a @click="actionMenu" v-if="$store.state.login">
             <img src="@/assets/menu.svg" />
           </a>
+          <span v-else>APP Financeiro</span>
         </div>
         <div class="menu-nav">
           <ul>
-            <li>
+            <li v-if="$store.state.login">
+              <a @click="deslogarUsuario">Sair</a>
+            </li>
+            <li v-else>
               <router-link to="/authentication">Entrar / Cadastrar</router-link>
             </li>
           </ul>
@@ -27,13 +31,21 @@ export default {
   name: "NavBar",
   methods: {
     actionMenu() {
-      this.$store.commit('setMenuActive', !this.$store.getters.getMenuActive);
+      this.$store.commit("setMenuActive", !this.$store.getters.getMenuActive);
+    },
+    deslogarUsuario() {
+      this.$store.dispatch("deslogarUsuario");
+      this.$router.push("/authentication");
     },
   },
 };
 </script>
 
 <style scoped>
+a {
+  cursor: pointer;
+}
+
 .container {
   align-items: center;
 }
@@ -69,6 +81,12 @@ export default {
 .menu-logo img {
   width: 25px;
   cursor: pointer;
+}
+
+.menu-logo span {
+  font-size: 1.3rem;
+  color: #4400ffb9;
+  font-weight: bold;
 }
 
 .menu-nav {

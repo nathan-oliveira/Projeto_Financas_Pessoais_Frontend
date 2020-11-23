@@ -1,34 +1,42 @@
 import axios from "axios";
 
+/* eslint-disabled no-param-reassign */
+
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000',
 });
 
-const api = {
-  get(endpoint, header) {
-    if (header) return axiosInstance.get(endpoint, header);
+axiosInstance.interceptors.request.use((config) => {
+  const { token } = window.localStorage;
 
+  if (token) {
+    config.headers.Authorization = token;
+  }
+
+  return config;
+},
+(error) => Promise.reject(error));
+
+const api = {
+  get(endpoint) {
     return axiosInstance.get(endpoint);
   },
-  post(endpoint, body, header) {
-    if (header) return axiosInstance.post(endpoint, body, header);
-
+  post(endpoint, body) {
     return axiosInstance.post(endpoint, body);
   },
-  delete(endpoint, header) {
-    if (header) return axiosInstance.delete(endpoint, header);
-
+  delete(endpoint) {
     return axiosInstance.delete(endpoint);
   },
-  put(endpoint, body, header) {
-    if (header) return axiosInstance.put(endpoint, body, header);
+  put(endpoint, body) {
     return axiosInstance.put(endpoint, body);
+  },
+  validateToken() {
+    return axiosInstance.post('http://localhost:4000/validarToken');
   },
   login(body, active) {
     if (active) {
       return axios.post('http://localhost:4000/users', body);
     }
-
     return axios.post('http://localhost:4000/session', body);
   },
 };

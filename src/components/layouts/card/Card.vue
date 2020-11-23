@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 .card {
-  width: 500px;
+  width: 440px;
   /* height: 400px; */
   margin-top: -10vh;
   /* background: #fff; */

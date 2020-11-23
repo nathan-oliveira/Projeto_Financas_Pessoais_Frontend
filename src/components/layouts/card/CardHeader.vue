@@ -29,11 +29,11 @@ export default {
 }
 
 .card-title:after {
-  width: 48%;
+  width: 53%;
 }
 
 .card-title2:after {
-  width: 38%;
+  width: 42%;
 }
 
 @media screen and (max-width: 518px) {

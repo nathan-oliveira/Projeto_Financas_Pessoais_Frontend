@@ -36,6 +36,11 @@ export default {
       this.$store.commit('setFormActive', !this.$store.getters.getFormActive);
     },
   },
+  beforeCreate() {
+    if (window.localStorage.token) {
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 

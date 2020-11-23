@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-if="$store.state.login">
     <div class="sidebar-menu">
       <ul class="sidebar-menu-logo">
         <li>

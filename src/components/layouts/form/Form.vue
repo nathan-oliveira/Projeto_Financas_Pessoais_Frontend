@@ -37,19 +37,11 @@
       <a class="btn" @click="auth()">
         {{this.$store.getters.getFormActive ? 'Cadastrar': 'Entrar'}}
       </a>
-      <!-- <Button
-        type="button"
-        :title="this.$store.getters.getFormActive ? 'Cadastrar': 'Entrar'"
-        v-on:click="auth"
-      /> -->
     </div>
   </form>
 </template>
 
 <script>
-import api from "@/services";
-// import Button from "@/components/layouts/button/Button.vue";
-
 export default {
   name: "Form",
   data() {
@@ -64,23 +56,28 @@ export default {
   },
   methods: {
     auth() {
-      api.login({
-        name: this.usuario.name,
-        email: this.usuario.email,
-        password: this.usuario.password,
-        password_confirmation: this.usuario.password_confirmation,
-      }, this.$store.getters.getFormActive)
+      this.$store
+        .dispatch("authentication", this.usuario)
         .then((resp) => {
-          this.$store.commit('setFormActive', false);
+          if (this.$store.getters.getFormActive) {
+            this.$store.commit('UPDATE_LOGIN', false);
+          } else {
+            console.log(resp.data.name);
+            localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
-          if (resp.data.token) {
-            this.$store.commit('setUsuario', resp.data);
-            localStorage.setItem("usuario", JSON.stringify(resp.data));
-            this.$router.push("/");
+            this.$store.commit('UPDATE_USUARIO', {
+              name: resp.data.name,
+              email: resp.data.email,
+            });
+
+            this.$store.commit('UPDATE_LOGIN', true);
+            this.$router.push({ name: "home" });
           }
+
+          this.$store.commit('setFormActive', false);
         })
         .catch((err) => {
-          console.log('ERROR =>', err.response.data);
+          console.log('ERROR => ', err.response.data);
         });
     },
     actionForms() {
