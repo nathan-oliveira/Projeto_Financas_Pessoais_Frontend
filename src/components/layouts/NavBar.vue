@@ -90,6 +90,11 @@ export default {
 }
 
 @media (max-width: 739px) {
+  .menu {
+    background: #f7f6fb;
+    padding: 20px 5px;
+  }
+
   .menu-nav,
   .menu-logo {
     margin: 0 15px;

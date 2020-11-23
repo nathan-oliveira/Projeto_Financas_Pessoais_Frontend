@@ -52,7 +52,7 @@ body {
 @media screen and (max-width: 739px) {
   .container {
     flex-direction: column;
-    max-width: 500px;
+    /* max-width: 500px; */
   }
 
   .content_web1, .content_web2 {

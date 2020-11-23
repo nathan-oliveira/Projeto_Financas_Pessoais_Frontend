@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" v-if="getScreenWidth > 739">
+  <div class="sidebar">
     <div class="sidebar-menu">
       <ul class="sidebar-menu-logo">
         <li>
@@ -51,11 +51,6 @@
 <script>
 export default {
   name: "SideBar",
-  computed: {
-    getScreenWidth() {
-      return this.$store.getters.getScreenWidth;
-    },
-  },
 };
 </script>
 
@@ -100,4 +95,11 @@ export default {
 .sidebar-menu-link li {
   margin: 2.5rem 0rem;
 }
+
+@media screen and (max-width: 739px) {
+  .sidebar {
+    display: none;
+  }
+}
+
 </style>

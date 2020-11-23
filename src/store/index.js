@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     menuActive: true,
     formActive: false,
-    screenWidth: window.screen.availWidth,
     usuario: localStorage.getItem("usuario") ? JSON.parse(localStorage.getItem("usuario")) : null,
   },
   getters: {
@@ -23,9 +22,6 @@ export default new Vuex.Store({
     },
     getFormActive(state) {
       return state.formActive;
-    },
-    getScreenWidth(state) {
-      return state.screenWidth;
     },
   },
   mutations: {
