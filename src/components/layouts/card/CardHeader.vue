@@ -1,6 +1,6 @@
 <template>
   <div class="card-header">
-    <h1 :class="this.$store.getters.getFormActive ? 'card-title2' : 'card-title'">{{ title }}</h1>
+    <h1 :class="this.$store.state.formActive ? 'card-title2' : 'card-title'">{{ title }}</h1>
   </div>
 </template>
 
@@ -29,11 +29,11 @@ export default {
 }
 
 .card-title:after {
-  width: 53%;
+  width: 40%;
 }
 
 .card-title2:after {
-  width: 42%;
+  width: 32%;
 }
 
 @media screen and (max-width: 518px) {
@@ -42,7 +42,7 @@ export default {
   }
 
   .card-title2:after {
-    width: 48%;
+    width: 45%;
   }
 
   .card-title, .card-title2 {

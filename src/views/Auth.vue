@@ -1,12 +1,12 @@
 <template>
   <section class="content">
-    <Card>
-      <CardHeader :title="this.$store.getters.getFormActive ? 'Criar conta': 'Acessar conta'" />
+    <Card v-if="!$store.state.loading">
+      <CardHeader :title="$store.state.formActive ? 'Criar conta': 'Acessar conta'" />
       <CardMain>
         <Form>
           <a @click="actionForms">
             {{
-              this.$store.getters.getFormActive ?
+              $store.state.formActive ?
               'Já possui uma conta? Entrar Agora.' :
               'Não possui uma conta? Criar Agora.'
             }}
@@ -14,6 +14,7 @@
         </Form>
       </CardMain>
     </Card>
+    <PaginaCarregando key="Carregando" v-else />
   </section>
 </template>
 
@@ -33,14 +34,9 @@ export default {
   },
   methods: {
     actionForms() {
-      this.$store.commit('setFormActive', !this.$store.getters.getFormActive);
+      this.$store.commit('UPDATE_FORMACTIVE', !this.$store.state.formActive);
     },
   },
-  // beforeCreate() {
-  //   if (window.localStorage.token) {
-  //     this.$router.push("/");
-  //   }
-  // },
 };
 </script>
 

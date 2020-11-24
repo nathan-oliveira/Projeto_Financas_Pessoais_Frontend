@@ -1,11 +1,13 @@
 <template>
   <div :class="$store.state.login ?
-    (this.$store.getters.getMenuActive ? 'content_web1' : 'content_web2') : 'content_web'">
+    ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
   <!-- <div :class="$store.state.login ?
     (this.$store.getters.getMenuActive ? 'content_web1' : 'content_web2') : 'content_web'"> -->
     <SideBar />
     <NavBar>
-      <router-view />
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </NavBar>
   </div>
   <!-- $store.state.login -->
@@ -60,14 +62,12 @@ body {
 
 .container {
   display: flex;
-  /* max-width: 1300px; */
   margin: 0 auto;
 }
 
 @media screen and (max-width: 739px) {
   .container {
     flex-direction: column;
-    /* max-width: 500px; */
   }
 
   .content_web1, .content_web2 {
@@ -85,6 +85,7 @@ ul li {
 
 .content {
   min-height: 100vh !important;
+  padding: 20px;
 }
 
 .content_web {
@@ -129,5 +130,23 @@ ul li {
 .btn-disabled:hover {
   background: #bbc;
   transform: scale(1);
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter {
+  transform: translate3d(0, -20px, 0);
+}
+
+.v-leave-to {
+  transform: translate3d(0, 20px, 0);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s;
 }
 </style>

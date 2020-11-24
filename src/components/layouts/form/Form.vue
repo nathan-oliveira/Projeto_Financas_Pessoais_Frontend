@@ -1,44 +1,46 @@
 <template>
-  <form class="form">
-    <div class="form-group" v-if="this.$store.getters.getFormActive">
-      <label>Nome:</label>
-      <input
-        type="text"
-        placeholder="Nome"
-        v-model="usuario.name"
-      />
-    </div>
-    <div class="form-group">
-      <label>E-mail:</label>
-      <input
-        type="text"
-        placeholder="E-mail"
-        v-model="usuario.email"
-      />
-    </div>
-    <div class="form-group">
-      <label>Senha:</label>
-      <input
-        type="password"
-        placeholder="Senha"
-        v-model="usuario.password"
-      />
-    </div>
-    <div class="form-group" v-if="this.$store.getters.getFormActive">
-      <label>Confirmar Senha:</label>
-      <input
-        type="password"
-        placeholder="Confirmar Senha"
-        v-model="usuario.password_confirmation"
-      />
-    </div>
-    <div class="form-button">
-      <slot></slot>
-      <a class="btn" @click="auth()">
-        {{this.$store.getters.getFormActive ? 'Cadastrar': 'Entrar'}}
-      </a>
-    </div>
-  </form>
+  <div>
+    <form class="form">
+      <div class="form-group" v-if="$store.state.formActive">
+        <label>Nome:</label>
+        <input
+          type="text"
+          placeholder="Nome"
+          v-model="usuario.name"
+        />
+      </div>
+      <div class="form-group">
+        <label>E-mail:</label>
+        <input
+          type="text"
+          placeholder="E-mail"
+          v-model="usuario.email"
+        />
+      </div>
+      <div class="form-group">
+        <label>Senha:</label>
+        <input
+          type="password"
+          placeholder="Senha"
+          v-model="usuario.password"
+        />
+      </div>
+      <div class="form-group" v-if="$store.state.formActive">
+        <label>Confirmar Senha:</label>
+        <input
+          type="password"
+          placeholder="Confirmar Senha"
+          v-model="usuario.password_confirmation"
+        />
+      </div>
+      <div class="form-button">
+        <slot></slot>
+        <a class="btn" @click.prevent="auth">
+          {{$store.state.formActive ? 'Cadastrar': 'Entrar'}}
+        </a>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -55,14 +57,17 @@ export default {
     };
   },
   methods: {
-    auth() {
+    auth(event) {
+      this.$store.commit('UPDATE_LOADING', true);
+
+      const button = event.currentTarget;
+      button.setAttribute("disabled", "");
       this.$store
         .dispatch("authentication", this.usuario)
         .then((resp) => {
-          if (this.$store.getters.getFormActive) {
+          if (this.$store.state.formActive) {
             this.$store.commit('UPDATE_LOGIN', false);
           } else {
-            console.log(resp.data.name);
             localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
             this.$store.commit('UPDATE_USUARIO', {
@@ -74,14 +79,17 @@ export default {
             this.$router.push({ name: "home" });
           }
 
-          this.$store.commit('setFormActive', false);
+          this.$store.commit('UPDATE_FORMACTIVE', false);
+          button.removeAttribute("disabled", "");
+          this.$store.commit('UPDATE_LOADING', false);
         })
         .catch((err) => {
           console.log('ERROR => ', err.response.data);
+          this.$store.commit('UPDATE_LOADING', false);
         });
     },
     actionForms() {
-      this.$store.commit('setFormActive', !this.$store.getters.getFormActive);
+      this.$store.commit('UPDATE_FORMACTIVE', !this.$store.state.formActive);
     },
   },
 };

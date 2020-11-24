@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true,
   state: {
+    loading: false,
     menuActive: false,
     formActive: false,
     login: !!(localStorage.getItem("usuario") && localStorage.getItem("token")),
@@ -20,16 +21,13 @@ export default new Vuex.Store({
       state.usuario = payload;
       localStorage.setItem("usuario", JSON.stringify(payload));
     },
-    // setUsuario(state, value) {
-    //   state.usuario = value;
-    // },
-    // setConteudosLinhaTempo(state, value) {
-    //   state.conteudosLinhaTempo = value;
-    // },
-    setMenuActive(state, value) {
+    UPDATE_LOADING(state, payload) {
+      state.loading = payload;
+    },
+    UPDATE_MENUACTIVE(state, value) {
       state.menuActive = value;
     },
-    setFormActive(state, value) {
+    UPDATE_FORMACTIVE(state, value) {
       state.formActive = value;
     },
   },
@@ -40,12 +38,12 @@ export default new Vuex.Store({
         email: payload.email,
         password: payload.password,
         password_confirmation: payload.password_confirmation,
-      }, this.getters.getFormActive);
+      }, this.state.formActive);
 
       /* .then((resp) => {
           if (this.getters.getFormActive) {
             context.commit('UPDATE_LOGIN', false);
-            context.commit('setFormActive', false);
+            context.commit('UPDATE_FORMACTIVE', false);
           } else {
             window.localStorage.token = `Bearer ${resp.data.token}`;
 
@@ -55,7 +53,6 @@ export default new Vuex.Store({
             });
 
             context.commit('UPDATE_LOGIN', true);
-
           }
         });
         */
@@ -67,23 +64,6 @@ export default new Vuex.Store({
       window.localStorage.removeItem("usuario");
 
       context.commit("UPDATE_LOGIN", false);
-    },
-  },
-  getters: {
-    // getUsuario(state) {
-    //   return state.usuario;
-    // },
-    // getToken(state) {
-    //   return state.token;
-    // },
-    getLogin(state) {
-      return state.login;
-    },
-    getMenuActive(state) {
-      return state.menuActive;
-    },
-    getFormActive(state) {
-      return state.formActive;
     },
   },
   modules: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="menu">
-      <div class="container">
+      <nav class="container">
         <div class="menu-logo">
           <a @click="actionMenu" v-if="$store.state.login">
             <img src="@/assets/menu.svg" />
@@ -18,7 +18,10 @@
             </li>
           </ul>
         </div>
-      </div>
+      </nav>
+      <nav class="menu-responsivo">
+        <NavItem />
+      </nav>
     </header>
     <main>
       <slot></slot>
@@ -27,11 +30,16 @@
 </template>
 
 <script>
+import NavItem from "@/components/layouts/NavItem.vue";
+
 export default {
   name: "NavBar",
+  components: {
+    NavItem,
+  },
   methods: {
     actionMenu() {
-      this.$store.commit("setMenuActive", !this.$store.getters.getMenuActive);
+      this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
     },
     deslogarUsuario() {
       this.$store.dispatch("deslogarUsuario");
@@ -52,8 +60,10 @@ a {
 
 .menu {
   background: #f7f6fb;
-  padding: 20px 10px;
+  padding: 15px 10px;
+  border-bottom: 1px solid #efefefa8;
 }
+
 .menu-nav a {
   color: rgb(31, 31, 31);
   font-size: 1.1rem;
@@ -105,6 +115,12 @@ a {
 
 .menu-nav ul li a {
   padding-left: 30px;
+}
+
+@media screen and (min-width: 740px) {
+  .menu-responsivo {
+    display: none;
+  }
 }
 
 @media (max-width: 739px) {

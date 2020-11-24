@@ -1,104 +1,65 @@
 <template>
-  <div class="sidebar" v-if="$store.state.login">
+  <div class="sidebar" v-if="$store.state.login" @mouseover="actionMenu" @mouseout="actionMenu">
     <div class="sidebar-menu">
       <ul class="sidebar-menu-logo">
         <li>
           <router-link to="/">
             FI<span
-              :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`"
+              :class="`${$store.state.menuActive ? '' : 'offscreen'}`"
             >NANCEIRO</span>
           </router-link>
         </li>
       </ul>
-      <ul class="sidebar-menu-link">
-        <li>
-          <router-link to="/">
-            <i class="fas fa-home"></i>
-            <p
-              :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`">Dashboard
-            </p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="far fa-credit-card"></i>
-            <p
-              :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`">Receitas
-            </p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/">
-            <i class="fas fa-credit-card"></i>
-            <p
-              :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`">Despesa
-            </p>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/categoria">
-            <i class="fas fa-plus-circle"></i>
-            <p
-              :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`">Categorias
-            </p>
-          </router-link>
-        </li>
-      </ul>
+      <NavItem class="sidebar-menu-link" />
     </div>
   </div>
 </template>
 
 <script>
+import NavItem from "@/components/layouts/NavItem.vue";
+
 export default {
   name: "SideBar",
+  components: {
+    NavItem,
+  },
+  methods: {
+    actionMenu() {
+      if (!this.$store.state.menuActive) {
+        this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .sidebar {
   padding: 18px 20px;
-  background: #4723d9;
-  border-right: 2px solid #3a1bb8;
+  background: linear-gradient(180deg,#4723d9 35%, #87f 100%);
+  /* background: #4723d9; */
+  border-right: 1px solid linear-gradient(180deg,#4723d9 35%, #87f 100%);
 }
 
-.sidebar-visibled {
+.offscreen {
   display: none;
+  transition: all 0.3s;
 }
 
 .sidebar-menu-logo li a {
   color: #f7f6fb !important;
   font-size: 1.4rem;
   margin-bottom: 1.5rem;
-}
-
-.sidebar-menu-link li a {
-  align-items: center;
-  color: #f7f6fb !important;
-  display: flex;
-}
-
-.sidebar-menu-link li a p {
-  font-size: 1.25rem;
-  transition: 0.3s;
-  margin-left: 10px;
-
-}
-
-.sidebar-menu-link li a:hover{
-  color: #f7f6fba8 !important;
-}
-
-.sidebar-menu-link li a i {
-  font-size: 1.2rem;
-}
-
-.sidebar-menu-link li {
-  margin: 2.5rem 0rem;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 739px) {
   .sidebar {
     display: none;
+  }
+
+  .content {
+    display: block;
   }
 }
 
