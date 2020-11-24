@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     menuActive: false,
     formActive: false,
-    login: !!localStorage.getItem("usuario"),
+    login: !!(localStorage.getItem("usuario") && localStorage.getItem("token")),
     usuario: localStorage.getItem("usuario") ? JSON.parse(localStorage.getItem("usuario")) : null,
   },
   mutations: {

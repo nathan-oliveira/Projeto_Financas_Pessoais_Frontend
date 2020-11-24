@@ -36,7 +36,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/">
+          <router-link to="/categoria">
             <i class="fas fa-plus-circle"></i>
             <p
               :class="`${this.$store.getters.getMenuActive ? '' : 'sidebar-visibled'}`">Categorias

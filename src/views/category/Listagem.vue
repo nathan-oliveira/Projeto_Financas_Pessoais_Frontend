@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p>Cadastrar Categoria</p>
+    <p>Listagem Categoria</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Cadastrar",
+  name: "Categoria",
 };
 </script>

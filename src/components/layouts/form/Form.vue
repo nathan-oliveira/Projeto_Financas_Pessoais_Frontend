@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+.btn {
+  padding: 10px 22px;
+}
+
 .form {
   width: 100%;
 }

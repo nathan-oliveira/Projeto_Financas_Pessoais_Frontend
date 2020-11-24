@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <section class="content">
     <Card>
       <CardHeader :title="this.$store.getters.getFormActive ? 'Criar conta': 'Acessar conta'" />
       <CardMain>
@@ -14,7 +14,7 @@
         </Form>
       </CardMain>
     </Card>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -36,11 +36,11 @@ export default {
       this.$store.commit('setFormActive', !this.$store.getters.getFormActive);
     },
   },
-  beforeCreate() {
-    if (window.localStorage.token) {
-      this.$router.push("/");
-    }
-  },
+  // beforeCreate() {
+  //   if (window.localStorage.token) {
+  //     this.$router.push("/");
+  //   }
+  // },
 };
 </script>
 

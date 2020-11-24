@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '*',
+    component: () => import(/* webpackChunkName: "*" */ '../views/PaginaNaoEncontrada.vue'),
+  },
+  {
     path: '/',
     name: 'home',
     meta: {
@@ -15,18 +19,26 @@ const routes = [
   {
     path: '/authentication',
     name: 'authentication',
+    meta: {
+      access: true,
+    },
     component: () => import(/* webpackChunkName: "authentication" */ '../views/Auth.vue'),
   },
   {
-    path: '/cadastrar',
-    component: () => import(/* webpackChunkName: "home" */ '../views/category/Cadastrar.vue'),
+    path: '/categoria',
+    component: () => import(/* webpackChunkName: "cadastrar" */ '../views/category/Categoria.vue'),
     meta: {
       login: true,
     },
     children: [
       {
         path: '',
-        name: 'cadastrar',
+        name: 'listagemCategoria',
+        component: () => import(/* webpackChunkName: "cadastrar" */ '../views/category/Listagem.vue'),
+      },
+      {
+        path: 'cadastrar',
+        name: 'cadastrarCategoria',
         component: () => import(/* webpackChunkName: "home" */ '../views/category/Cadastrar.vue'),
       },
     ],
@@ -41,11 +53,17 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.login)) {
-    if (!window.localStorage.token) {
-      next("/authentication");
-    } else {
-      next();
-    }
+    if (!window.localStorage.token || !window.localStorage.usuario) next("/authentication");
+    next();
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.access)) {
+    if (window.localStorage.token && window.localStorage.usuario) next("/");
+    next();
   } else {
     next();
   }
