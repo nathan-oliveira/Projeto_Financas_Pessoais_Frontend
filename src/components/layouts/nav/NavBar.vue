@@ -13,7 +13,7 @@
             <li>
               <div class="dropdown">
                 <Dropdown :titulo="nome">
-                  <router-link to="/">Minha Conta</router-link>
+                  <router-link to="/minha-conta">Minha Conta</router-link>
                   <a @click="deslogarUsuario">Sair</a>
                 </Dropdown>
               </div>
@@ -81,7 +81,7 @@ a {
 
 .menu-nav a {
   color: rgb(31, 31, 31);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .menu-logo {
@@ -104,7 +104,7 @@ a {
 }
 
 .menu-logo img {
-  width: 25px;
+  width: 23px;
   cursor: pointer;
 }
 

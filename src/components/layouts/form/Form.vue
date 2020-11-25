@@ -66,9 +66,6 @@ export default {
           this.$store.commit('UPDATE_LOADING', false);
         });
     },
-    actionForms() {
-      this.$store.commit('UPDATE_FORMACTIVE', !this.$store.state.formActive);
-    },
   },
 };
 </script>

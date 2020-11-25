@@ -62,6 +62,12 @@ body {
   margin: 0 auto;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  grid-gap: 30px;
+}
+
 @media screen and (max-width: 739px) {
   .container {
     flex-direction: column;
@@ -69,6 +75,13 @@ body {
 
   .content_web1, .content_web2 {
     grid-template-columns: 100% !important;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    margin: 0px auto;
+    min-height: 100% !important;
+    display: block;
   }
 }
 

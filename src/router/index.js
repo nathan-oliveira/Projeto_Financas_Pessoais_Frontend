@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '*',
-    component: () => import(/* webpackChunkName: "*" */ '../views/PaginaNaoEncontrada.vue'),
+    component: () => import('../views/PaginaNaoEncontrada.vue'),
   },
   {
     path: '/',
@@ -14,7 +14,7 @@ const routes = [
     meta: {
       login: true,
     },
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    component: () => import('../views/Home.vue'),
   },
   {
     path: '/authentication',
@@ -22,11 +22,11 @@ const routes = [
     meta: {
       access: true,
     },
-    component: () => import(/* webpackChunkName: "authentication" */ '../views/Auth.vue'),
+    component: () => import('../views/Auth.vue'),
   },
   {
     path: '/categoria',
-    component: () => import(/* webpackChunkName: "cadastrar" */ '../views/category/Categoria.vue'),
+    component: () => import('../views/category/Categoria.vue'),
     meta: {
       login: true,
     },
@@ -34,14 +34,18 @@ const routes = [
       {
         path: '',
         name: 'listagemCategoria',
-        component: () => import(/* webpackChunkName: "cadastrar" */ '../views/category/Listagem.vue'),
+        component: () => import('../views/category/Listagem.vue'),
       },
       {
         path: 'cadastrar',
         name: 'cadastrarCategoria',
-        component: () => import(/* webpackChunkName: "home" */ '../views/category/Cadastrar.vue'),
+        component: () => import('../views/category/Cadastrar.vue'),
       },
     ],
+  },
+  {
+    path: '/minha-conta',
+    component: () => import('../views/perfil/Perfil.vue'),
   },
 ];
 

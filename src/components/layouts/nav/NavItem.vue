@@ -59,7 +59,7 @@ export default {
 }
 
 .sidebar-menu-link li a p {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   margin-left: 10px;
 }
 
@@ -68,7 +68,7 @@ export default {
 }
 
 .sidebar-menu-link li a i {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .sidebar-menu-link li {

@@ -1,28 +1,34 @@
 <template>
   <section class="content">
-    <nav class="menu">
-      <router-link :to="{ name: 'listagemCategoria' }">Listar</router-link>
-      <router-link :to="{ name: 'cadastrarCategoria' }">Cadastrar</router-link>
-    </nav>
-    <transition mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <Breadcrumb>
+      <BreadcrumbItem titulo="Categorias" asset="Listagens" />
+    </Breadcrumb>
+    <div class="grid">
+      <nav class="menu">
+        <router-link :to="{ name: 'listagemCategoria' }">Listar</router-link>
+        <router-link :to="{ name: 'cadastrarCategoria' }">Cadastrar</router-link>
+      </nav>
+      <transition mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </div>
   </section>
 </template>
 
 <script>
+import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
+import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
+
 export default {
   name: "Categoria",
+  components: {
+    Breadcrumb,
+    BreadcrumbItem,
+  },
 };
 </script>
 
 <style scoped>
-.content {
-  display: grid;
-  grid-template-columns: minmax(140px, 200px) 1fr;
-  grid-gap: 30px;
-}
-
 .menu a {
   padding: 10px 20px;
   display: block;
@@ -39,14 +45,4 @@ export default {
   color: white;
   border: none;
 }
-
-@media screen and (max-width: 739px) {
-  .content {
-    grid-template-columns: 1fr;
-    margin: 0px auto;
-    min-height: 100% !important;
-    display: block;
-  }
-}
-
 </style>

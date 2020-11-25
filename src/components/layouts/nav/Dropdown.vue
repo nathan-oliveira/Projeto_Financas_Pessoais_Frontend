@@ -1,6 +1,8 @@
 <template>
   <div class="dropdown">
-    <button class="dropbtn">{{ titulo }}</button><i class="fas fa-angle-down"></i>
+    <div class="dropdown-center">
+      <button class="dropbtn">{{ titulo }}</button><i class="fas fa-angle-down"></i>
+    </div>
     <div class="dropdown-content">
       <slot></slot>
     </div>
@@ -19,7 +21,7 @@ export default {
   cursor: pointer;
   background-color: transparent;
   color: rgb(31, 31, 31);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: "Cabin", sans-serif;
   border: none;
   outline: none;
@@ -55,5 +57,11 @@ export default {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.dropdown-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 </style>
