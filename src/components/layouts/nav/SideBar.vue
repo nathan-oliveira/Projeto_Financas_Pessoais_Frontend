@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import NavItem from "@/components/layouts/NavItem.vue";
+import NavItem from "@/components/layouts/nav/NavItem.vue";
 
 export default {
   name: "SideBar",

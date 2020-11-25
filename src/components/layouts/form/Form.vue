@@ -57,32 +57,10 @@ export default {
     };
   },
   methods: {
-    auth(event) {
+    auth() {
       this.$store.commit('UPDATE_LOADING', true);
-
-      const button = event.currentTarget;
-      button.setAttribute("disabled", "");
       this.$store
-        .dispatch("authentication", this.usuario)
-        .then((resp) => {
-          if (this.$store.state.formActive) {
-            this.$store.commit('UPDATE_LOGIN', false);
-          } else {
-            localStorage.setItem("token", `Bearer ${resp.data.token}`);
-
-            this.$store.commit('UPDATE_USUARIO', {
-              name: resp.data.name,
-              email: resp.data.email,
-            });
-
-            this.$store.commit('UPDATE_LOGIN', true);
-            this.$router.push({ name: "home" });
-          }
-
-          this.$store.commit('UPDATE_FORMACTIVE', false);
-          button.removeAttribute("disabled", "");
-          this.$store.commit('UPDATE_LOADING', false);
-        })
+        .dispatch("authentication", { usuario: this.usuario, router: this.$router })
         .catch((err) => {
           console.log('ERROR => ', err.response.data);
           this.$store.commit('UPDATE_LOADING', false);

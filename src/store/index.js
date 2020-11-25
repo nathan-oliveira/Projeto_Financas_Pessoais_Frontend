@@ -34,28 +34,22 @@ export default new Vuex.Store({
   actions: {
     authentication(context, payload) {
       return api.login({
-        name: payload.name,
-        email: payload.email,
-        password: payload.password,
-        password_confirmation: payload.password_confirmation,
-      }, this.state.formActive);
+        name: payload.usuario.name,
+        email: payload.usuario.email,
+        password: payload.usuario.password,
+        password_confirmation: payload.usuario.password_confirmation,
+      }, this.state.formActive)
+        .then((resp) => {
+          window.localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
-      /* .then((resp) => {
-          if (this.getters.getFormActive) {
-            context.commit('UPDATE_LOGIN', false);
-            context.commit('UPDATE_FORMACTIVE', false);
-          } else {
-            window.localStorage.token = `Bearer ${resp.data.token}`;
+          context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email });
+          context.commit('UPDATE_LOGIN', true);
 
-            context.commit('UPDATE_USUARIO', {
-              name: payload.name,
-              email: payload.email,
-            });
+          payload.router.push({ name: "home" });
 
-            context.commit('UPDATE_LOGIN', true);
-          }
+          context.commit('UPDATE_FORMACTIVE', false);
+          context.commit('UPDATE_LOADING', false);
         });
-        */
     },
     deslogarUsuario(context) {
       context.commit("UPDATE_USUARIO", { name: "", email: "" });

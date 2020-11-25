@@ -4,7 +4,9 @@
       <router-link :to="{ name: 'listagemCategoria' }">Listar</router-link>
       <router-link :to="{ name: 'cadastrarCategoria' }">Cadastrar</router-link>
     </nav>
-    <router-view></router-view>
+    <transition mode="out-in">
+      <router-view></router-view>
+    </transition>
   </section>
 </template>
 

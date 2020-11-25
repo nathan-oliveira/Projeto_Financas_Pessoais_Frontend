@@ -9,11 +9,18 @@
           <span v-else>APP Financeiro</span>
         </div>
         <div class="menu-nav">
-          <ul>
-            <li v-if="$store.state.login">
-              <a @click="deslogarUsuario">Sair</a>
+          <ul v-if="$store.state.login">
+            <li>
+              <div class="dropdown">
+                <Dropdown :titulo="nome">
+                  <router-link to="/">Minha Conta</router-link>
+                  <a @click="deslogarUsuario">Sair</a>
+                </Dropdown>
+              </div>
             </li>
-            <li v-else>
+          </ul>
+          <ul v-else>
+            <li>
               <router-link to="/authentication">Entrar / Cadastrar</router-link>
             </li>
           </ul>
@@ -30,12 +37,20 @@
 </template>
 
 <script>
-import NavItem from "@/components/layouts/NavItem.vue";
+import NavItem from "@/components/layouts/nav/NavItem.vue";
+import Dropdown from "@/components/layouts/nav/Dropdown.vue";
 
 export default {
   name: "NavBar",
   components: {
     NavItem,
+    Dropdown,
+  },
+  computed: {
+    nome() {
+      const nome = this.$store.state.usuario.name.split(" ");
+      return `${nome[0]} ${nome[1]}`;
+    },
   },
   methods: {
     actionMenu() {

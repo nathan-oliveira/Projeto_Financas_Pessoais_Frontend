@@ -1,8 +1,6 @@
 <template>
   <div :class="$store.state.login ?
     ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
-  <!-- <div :class="$store.state.login ?
-    (this.$store.getters.getMenuActive ? 'content_web1' : 'content_web2') : 'content_web'"> -->
     <SideBar />
     <NavBar>
       <transition mode="out-in">
@@ -10,12 +8,11 @@
       </transition>
     </NavBar>
   </div>
-  <!-- $store.state.login -->
 </template>
 
 <script>
-import NavBar from "@/components/layouts/NavBar.vue";
-import SideBar from "@/components/layouts/SideBar.vue";
+import NavBar from "@/components/layouts/nav/NavBar.vue";
+import SideBar from "@/components/layouts/nav/SideBar.vue";
 import api from "@/services";
 
 export default {
