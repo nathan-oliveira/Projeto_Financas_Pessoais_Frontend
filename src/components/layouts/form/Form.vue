@@ -1,7 +1,7 @@
 <template>
   <div>
     <form class="form">
-      <div class="form-group" v-if="$store.state.formActive">
+      <div class="form-group" v-if="$store.state.formActive || $store.state.login">
         <label>Nome:</label>
         <input
           type="text"
@@ -25,7 +25,7 @@
           v-model="usuario.password"
         />
       </div>
-      <div class="form-group" v-if="$store.state.formActive">
+      <div class="form-group" v-if="$store.state.formActive || $store.state.login">
         <label>Confirmar Senha:</label>
         <input
           type="password"
@@ -33,9 +33,19 @@
           v-model="usuario.password_confirmation"
         />
       </div>
-      <div class="form-button">
+      <div :class="`form-button${$store.state.login ? ' updated' : ''}`">
         <slot></slot>
-        <a class="btn" @click.prevent="auth">
+        <a
+          class="btn"
+          @click.prevent="updated"
+          v-if="$store.state.login"
+        >
+          Atualizar
+        </a>
+        <a
+          class="btn"
+          @click.prevent="authentication" v-else
+        >
           {{$store.state.formActive ? 'Cadastrar': 'Entrar'}}
         </a>
       </div>
@@ -56,8 +66,16 @@ export default {
       },
     };
   },
+  created() {
+    if (this.$store.state.login) {
+      this.usuario.name = this.$store.state.usuario.name;
+      this.usuario.email = this.$store.state.usuario.email;
+    }
+
+    this.$store.commit('UPDATE_LOADING', false);
+  },
   methods: {
-    auth() {
+    authentication() {
       this.$store.commit('UPDATE_LOADING', true);
       this.$store
         .dispatch("authentication", { usuario: this.usuario, router: this.$router })
@@ -66,6 +84,9 @@ export default {
           this.$store.commit('UPDATE_LOADING', false);
         });
     },
+    updated() {
+      console.log('updated');
+    },
   },
 };
 </script>
@@ -73,6 +94,10 @@ export default {
 <style scoped>
 .btn {
   padding: 10px 22px;
+}
+
+.updated {
+  float: right;
 }
 
 .form {
@@ -86,8 +111,12 @@ export default {
   justify-content: space-between;
 }
 
+.form-button a {
+  cursor: pointer;
+}
+
 .form-group {
-  padding: 2% 0;
+  padding: 1% 0;
 }
 
 .form-group label {
@@ -120,6 +149,16 @@ export default {
   border-color: #87f;
 }
 
+@media screen and (max-width: 739px) {
+  .btn {
+    width: 100%;
+  }
+
+  .updated {
+    float: none;
+  }
+}
+
 @media screen and (max-width: 518px) {
   .form-group label {
     font-size: 1rem;
@@ -129,9 +168,5 @@ export default {
   .form-group textarea {
     padding: 12px;
   }
-}
-
-.form-button a {
-  cursor: pointer;
 }
 </style>

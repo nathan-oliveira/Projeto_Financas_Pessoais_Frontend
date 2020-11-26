@@ -23,8 +23,10 @@ export default {
   },
   created() {
     if (window.localStorage.token) {
-      api
-        .validateToken()
+      api.validateToken()
+        .then(() => {
+          this.$store.dispatch("getUsuario");
+        })
         .catch(() => {
           window.localStorage.removeItem("token");
           this.$router.push("/authentication");

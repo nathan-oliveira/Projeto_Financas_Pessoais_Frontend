@@ -57,7 +57,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.login)) {
-    if (!window.localStorage.token || !window.localStorage.usuario) next("/authentication");
+    if (!window.localStorage.token) next("/authentication");
     next();
   } else {
     next();
@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.access)) {
-    if (window.localStorage.token && window.localStorage.usuario) next("/");
+    if (window.localStorage.token) next("/");
     next();
   } else {
     next();

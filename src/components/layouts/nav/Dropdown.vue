@@ -40,7 +40,7 @@ export default {
   min-width: 160px;
   z-index: 1;
   line-height: 45px;
-  margin-left: -20px;
+  margin-left: -90px;
 }
 
 .dropdown-content a {
