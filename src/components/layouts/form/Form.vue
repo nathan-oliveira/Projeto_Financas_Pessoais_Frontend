@@ -67,12 +67,13 @@ export default {
     };
   },
   created() {
-    if (this.$store.state.login) {
+    if (window.localStorage.token) {
       this.usuario.name = this.$store.state.usuario.name;
       this.usuario.email = this.$store.state.usuario.email;
+    } else {
+      this.$store.commit('UPDATE_LOGIN', false);
+      this.$store.commit('UPDATE_FORMACTIVE', false);
     }
-
-    this.$store.commit('UPDATE_LOADING', false);
   },
   methods: {
     authentication() {
@@ -85,7 +86,9 @@ export default {
         });
     },
     updated() {
-      console.log('updated');
+      if (window.localStorage.token) {
+        console.log(this.$store.state.usuario.name);
+      }
     },
   },
 };

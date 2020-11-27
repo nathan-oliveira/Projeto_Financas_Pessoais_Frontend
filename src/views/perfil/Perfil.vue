@@ -28,20 +28,10 @@ export default {
     Form,
   },
   befourCreated() {
-    this.$store.commit('UPDATE_LOADING', true);
-    if (this.$store.state.login) {
-      this.$store.dispatch("getUsuario")
-        .catch((err) => {
-          console.log(err);
-        });
+    if (window.localStorage.token) {
+      this.$store.dispatch("getUsuario");
     }
   },
-  // computed: {
-  //   nome() {
-  //     const nome = this.$store.state.usuario.name.split(" ");
-  //     return `${nome[0]} ${nome[1]}`;
-  //   },
-  // },
 };
 </script>
 

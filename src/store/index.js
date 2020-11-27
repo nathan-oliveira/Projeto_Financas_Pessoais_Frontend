@@ -11,7 +11,7 @@ export default new Vuex.Store({
     menuActive: false,
     formActive: false,
     login: localStorage.getItem("token"),
-    usuario: null,
+    usuario: localStorage.getItem("usuario") ? JSON.parse(localStorage.getItem("usuario")) : null,
   },
   mutations: {
     UPDATE_LOGIN(state, payload) {
@@ -45,29 +45,27 @@ export default new Vuex.Store({
         password_confirmation: payload.usuario.password_confirmation,
       }, this.state.formActive)
         .then((resp) => {
-          window.localStorage.setItem("token", `Bearer ${resp.data.token}`);
+          if (resp.data.token) {
+            localStorage.setItem("token", `Bearer ${resp.data.token}`);
+            localStorage.setItem("usuario", JSON.stringify({ name: resp.data.name, email: resp.data.email }));
 
-          context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email });
-          context.commit('UPDATE_LOGIN', true);
+            context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email });
+            context.commit('UPDATE_LOGIN', true);
+            payload.router.push({ name: "home" });
+            context.commit('UPDATE_FORMACTIVE', true);
+          }
 
-          payload.router.push({ name: "home" });
-
-          context.commit('UPDATE_FORMACTIVE', true);
+          context.commit('UPDATE_FORMACTIVE', false);
           context.commit('UPDATE_LOADING', false);
         });
     },
     deslogarUsuario(context) {
       context.commit('UPDATE_FORMACTIVE', false);
       context.commit("UPDATE_USUARIO", { name: "", email: "" });
+      context.commit("UPDATE_LOGIN", false);
 
       window.localStorage.removeItem("token");
-
-      context.commit("UPDATE_LOGIN", false);
-    },
-  },
-  getters: {
-    usuario() {
-      return api.get('/profile');
+      window.localStorage.removeItem("usuario");
     },
   },
   modules: {

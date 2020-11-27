@@ -11,9 +11,9 @@
 </template>
 
 <script>
+import api from "@/services";
 import NavBar from "@/components/layouts/nav/NavBar.vue";
 import SideBar from "@/components/layouts/nav/SideBar.vue";
-import api from "@/services";
 
 export default {
   name: "App",
@@ -21,7 +21,7 @@ export default {
     NavBar,
     SideBar,
   },
-  created() {
+  beforeCreate() {
     if (window.localStorage.token) {
       api.validateToken()
         .then(() => {
