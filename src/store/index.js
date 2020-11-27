@@ -65,6 +65,11 @@ export default new Vuex.Store({
       context.commit("UPDATE_LOGIN", false);
     },
   },
+  getters: {
+    usuario() {
+      return api.get('/profile');
+    },
+  },
   modules: {
   },
 });

@@ -12,7 +12,7 @@
           <ul v-if="$store.state.login">
             <li>
               <div class="dropdown">
-                <Dropdown :titulo="'teste'">
+                <Dropdown :titulo="usuario">
                   <router-link to="/minha-conta">Minha Conta</router-link>
                   <a @click="deslogarUsuario">Sair</a>
                 </Dropdown>
@@ -37,15 +37,29 @@
 </template>
 
 <script>
+// import api from "@/services";
+
 import NavItem from "@/components/layouts/nav/NavItem.vue";
 import Dropdown from "@/components/layouts/nav/Dropdown.vue";
 
 export default {
   name: "NavBar",
-  props: ["nome"],
+  data() {
+    return {
+      usuario: "",
+    };
+  },
   components: {
     NavItem,
     Dropdown,
+  },
+  created() {
+    if (this.$store.state.login) {
+      this.$store.getters.usuario
+        .then(async (resp) => {
+          this.usuario = await resp.data.name.split(" ")[0];
+        });
+    }
   },
   methods: {
     actionMenu() {
