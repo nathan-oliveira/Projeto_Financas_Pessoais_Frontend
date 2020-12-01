@@ -12,7 +12,7 @@
           <ul v-if="$store.state.login">
             <li>
               <div class="dropdown">
-                <Dropdown :titulo="this.$store.state.usuario.name.split(' ')[0]">
+                <Dropdown :titulo="nomeUsuario">
                   <router-link to="/minha-conta">Minha Conta</router-link>
                   <a @click="deslogarUsuario">Sair</a>
                 </Dropdown>
@@ -44,6 +44,7 @@ import Dropdown from "@/components/layouts/nav/Dropdown.vue";
 
 export default {
   name: "NavBar",
+  props: ["nomeUsuario"],
   components: {
     NavItem,
     Dropdown,

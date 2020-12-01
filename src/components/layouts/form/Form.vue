@@ -68,12 +68,28 @@ export default {
   },
   created() {
     if (window.localStorage.token) {
-      this.usuario.name = this.$store.state.usuario.name;
-      this.usuario.email = this.$store.state.usuario.email;
+      if (this.$store.state.usuario) {
+        this.usuario.name = this.$store.state.usuario.name;
+        this.usuario.email = this.$store.state.usuario.email;
+      }
     } else {
       this.$store.commit('UPDATE_LOGIN', false);
       this.$store.commit('UPDATE_FORMACTIVE', false);
     }
+  },
+  computed: {
+    usuariosState() {
+      if (this.$store.state.usuario) {
+        return {
+          usuario: this.$store.state.usuario.name,
+          email: this.$store.state.usuario.email,
+        };
+      }
+      return {
+        usuario: "",
+        email: "",
+      };
+    },
   },
   methods: {
     authentication() {

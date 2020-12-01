@@ -2,7 +2,7 @@
   <div :class="$store.state.login ?
     ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
     <SideBar />
-    <NavBar>
+    <NavBar :nomeUsuario="nameUser">
       <transition mode="out-in">
         <router-view />
       </transition>
@@ -32,6 +32,15 @@ export default {
           this.$router.push("/authentication");
         });
     }
+  },
+  computed: {
+    nameUser() {
+      if (this.$store.state.usuario) {
+        return this.$store.state.usuario.name.split(' ')[0];
+      }
+
+      return "Carregando...";
+    },
   },
 };
 </script>

@@ -24,7 +24,7 @@
         </p>
       </router-link>
     </li>
-    <li>
+    <li v-if="menuOwner">
       <router-link to="/categoria">
         <i class="fas fa-plus-circle"></i>
         <p @click="actionMenu"
@@ -38,6 +38,7 @@
 <script>
 export default {
   name: "NavItem",
+  props: ["menuOwner"],
   methods: {
     actionMenu() {
       this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);

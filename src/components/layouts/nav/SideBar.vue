@@ -10,7 +10,7 @@
           </router-link>
         </li>
       </ul>
-      <NavItem class="sidebar-menu-link" />
+      <NavItem class="sidebar-menu-link" :menuOwner="menuOwner" />
     </div>
   </div>
 </template>
@@ -28,6 +28,16 @@ export default {
       if (!this.$store.state.menuActive) {
         this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
       }
+    },
+  },
+  computed: {
+    menuOwner() {
+      if (this.$store.state.usuario) {
+        if (this.$store.state.usuario.nivel) {
+          return true;
+        }
+      }
+      return false;
     },
   },
 };
