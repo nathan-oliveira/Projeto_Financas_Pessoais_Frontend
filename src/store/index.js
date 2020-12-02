@@ -31,8 +31,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getUsuario(context) {
-      return api.get('/profile')
+    getUsuario() {
+      return api.get('/profile');
+    },
+    updateUser(context, payload) {
+      return api.put("/users", payload)
         .then((resp) => {
           context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
         });

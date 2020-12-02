@@ -56,6 +56,7 @@
 <script>
 export default {
   name: "Form",
+  props: ["dataUser"],
   data() {
     return {
       usuario: {
@@ -66,29 +67,22 @@ export default {
       },
     };
   },
-  created() {
+  beforeCreate() {
     if (window.localStorage.token) {
-      if (this.$store.state.usuario) {
-        this.usuario.name = this.$store.state.usuario.name;
-        this.usuario.email = this.$store.state.usuario.email;
-      }
-    } else {
-      this.$store.commit('UPDATE_LOGIN', false);
-      this.$store.commit('UPDATE_FORMACTIVE', false);
+      this.$store.dispatch("getUsuario")
+        .then((resp) => {
+          this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+          this.usuario.name = resp.data.name;
+          this.usuario.email = resp.data.email;
+        });
     }
   },
-  computed: {
-    usuariosState() {
-      if (this.$store.state.usuario) {
-        return {
-          usuario: this.$store.state.usuario.name,
-          email: this.$store.state.usuario.email,
-        };
-      }
-      return {
-        usuario: "",
-        email: "",
-      };
+  asyncComputed: {
+    async user() {
+      const resp = await this.$store.dispatch("getUsuario");
+      console.log('asyncComputed', resp.data);
+      this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+      return resp.data;
     },
   },
   methods: {
@@ -103,7 +97,16 @@ export default {
     },
     updated() {
       if (window.localStorage.token) {
-        console.log(this.$store.state.usuario.name);
+        if (!this.usuario.password) {
+          this.$delete(this.usuario, 'password');
+          this.$delete(this.usuario, 'password_confirmation');
+        }
+
+        this.$store
+          .dispatch("updateUser", this.usuario)
+          .catch((err) => {
+            console.log('ERROR => ', err.response.data);
+          });
       }
     },
   },
@@ -119,55 +122,6 @@ export default {
   float: right;
 }
 
-.form {
-  width: 100%;
-}
-
-.form-button {
-  margin-top: 3%;
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.form-button a {
-  cursor: pointer;
-}
-
-.form-group {
-  padding: 1% 0;
-}
-
-.form-group label {
-  display: block;
-  width: 100%;
-  font-size: 1.1rem;
-  color: rgba(0, 0, 0, 0.767);
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group textarea {
-  border-radius: 4px;
-  border: 1px solid #e4e4e4;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.1);
-  font-size: 1rem;
-  font-family: "Avenir", Arial, Helvetica, sans-serif;
-  margin-bottom: 0px;
-  width: 100%;
-  outline: none;
-}
-
-.form-group input:hover,
-.form-group input:focus,
-.form-group textarea:hover,
-.form-group textarea:focus {
-  outline: none;
-  box-shadow: 0 6px 12px rgba(30, 60, 90, 0.1);
-  border-color: #87f;
-}
-
 @media screen and (max-width: 739px) {
   .btn {
     width: 100%;
@@ -175,17 +129,6 @@ export default {
 
   .updated {
     float: none;
-  }
-}
-
-@media screen and (max-width: 518px) {
-  .form-group label {
-    font-size: 1rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 12px;
   }
 }
 </style>

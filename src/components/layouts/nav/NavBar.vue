@@ -37,8 +37,6 @@
 </template>
 
 <script>
-// import api from "@/services";
-
 import NavItem from "@/components/layouts/nav/NavItem.vue";
 import Dropdown from "@/components/layouts/nav/Dropdown.vue";
 

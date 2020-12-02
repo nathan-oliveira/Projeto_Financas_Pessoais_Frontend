@@ -27,10 +27,11 @@ export default {
     BreadcrumbItem,
     Form,
   },
-  befourCreated() {
-    if (window.localStorage.token) {
-      this.$store.dispatch("getUsuario");
-    }
+  beforeCreate() {
+    this.$store.dispatch("getUsuario")
+      .then((resp) => {
+        this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+      });
   },
 };
 </script>

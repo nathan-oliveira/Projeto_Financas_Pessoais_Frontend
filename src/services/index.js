@@ -1,7 +1,5 @@
 import axios from "axios";
 
-/* eslint-disabled no-param-reassign */
-
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000',
 });
