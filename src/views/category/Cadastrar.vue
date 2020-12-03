@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form class="form">
+  <form>
+    <div class="grid">
       <div class="form-group">
         <label>Categoria:</label>
         <input
@@ -15,13 +15,13 @@
           placeholder="URL do icone"
         />
       </div>
-      <div class="form-button">
-        <a class="btn">
-          Cadastrar
-        </a>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="form-button">
+      <a class="btn">
+        Cadastrar
+      </a>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -31,6 +31,20 @@ export default {
 </script>
 
 <style scoped>
+
+@media screen and (min-width: 519px) {
+  .form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+@media screen and (max-width: 518px) {
+  .form-group {
+    margin-top: 1%;
+  }
+}
+
 .form-button {
   float: right;
 }

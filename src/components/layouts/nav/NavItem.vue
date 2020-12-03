@@ -1,5 +1,7 @@
 <template>
-  <ul :class="`sidebar-menu-link ${$store.state.menuActive ? '' : 'visibled'}`">
+  <ul
+    v-if="$store.state.login"
+    :class="`sidebar-menu-link ${$store.state.menuActive ? '' : 'visibled'}`">
     <li>
       <router-link to="/">
         <i class="fas fa-home"></i>
@@ -94,6 +96,7 @@ export default {
 
   .sidebar-menu-link li a p {
     font-size: 1.1rem;
+    margin-left: 0px !important;
   }
 
   .visibled {

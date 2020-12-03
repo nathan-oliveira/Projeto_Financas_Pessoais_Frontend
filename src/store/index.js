@@ -12,6 +12,8 @@ export default new Vuex.Store({
     formActive: false,
     login: localStorage.getItem("token"),
     usuario: null,
+    erros: [],
+    success: [],
   },
   mutations: {
     UPDATE_LOGIN(state, payload) {
@@ -23,22 +25,25 @@ export default new Vuex.Store({
     UPDATE_LOADING(state, payload) {
       state.loading = payload;
     },
-    UPDATE_MENUACTIVE(state, value) {
-      state.menuActive = value;
+    UPDATE_MENUACTIVE(state, payload) {
+      state.menuActive = payload;
     },
-    UPDATE_FORMACTIVE(state, value) {
-      state.formActive = value;
+    UPDATE_FORMACTIVE(state, payload) {
+      state.formActive = payload;
+    },
+    UPDATE_ERROS(state, payload) {
+      state.erros = payload;
+    },
+    UPDATE_SUCCESS(state, payload) {
+      state.success = payload;
     },
   },
   actions: {
     getUsuario() {
-      return api.get('/profile');
+      return api.get("/profile");
     },
     updateUser(context, payload) {
-      return api.put("/users", payload)
-        .then((resp) => {
-          context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
-        });
+      return api.put("/users", payload);
     },
     authentication(context, payload) {
       return api.login({
@@ -51,18 +56,18 @@ export default new Vuex.Store({
           if (resp.data.token) {
             localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
-            context.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
-            context.commit('UPDATE_LOGIN', true);
+            context.commit("UPDATE_USUARIO", { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+            context.commit("UPDATE_LOGIN", true);
             payload.router.push({ name: "home" });
-            context.commit('UPDATE_FORMACTIVE', true);
+            context.commit("UPDATE_FORMACTIVE", true);
           }
 
-          context.commit('UPDATE_FORMACTIVE', false);
-          context.commit('UPDATE_LOADING', false);
+          context.commit("UPDATE_FORMACTIVE", false);
+          context.commit("UPDATE_LOADING", false);
         });
     },
     deslogarUsuario(context) {
-      context.commit('UPDATE_FORMACTIVE', false);
+      context.commit("UPDATE_FORMACTIVE", false);
       context.commit("UPDATE_USUARIO", { name: "", email: "", nivel: "" });
       context.commit("UPDATE_LOGIN", false);
 
