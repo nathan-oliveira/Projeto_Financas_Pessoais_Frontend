@@ -11,7 +11,9 @@ export default new Vuex.Store({
     menuActive: false,
     formActive: false,
     login: localStorage.getItem("token"),
-    usuario: null,
+    usuario: {
+      name: "", email: "", nivel: "", password: undefined, password_confirmation: undefined,
+    },
     erros: [],
     success: [],
   },
@@ -20,7 +22,7 @@ export default new Vuex.Store({
       state.login = payload;
     },
     UPDATE_USUARIO(state, payload) {
-      state.usuario = payload;
+      state.usuario = Object.assign(state.usuario, payload);
     },
     UPDATE_LOADING(state, payload) {
       state.loading = payload;
@@ -56,7 +58,13 @@ export default new Vuex.Store({
           if (resp.data.token) {
             localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
-            context.commit("UPDATE_USUARIO", { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+            context.commit("UPDATE_USUARIO", {
+              name: resp.data.name,
+              email: resp.data.email,
+              nivel: resp.data.nivel,
+              password: undefined,
+              password_confirmation: undefined,
+            });
             context.commit("UPDATE_LOGIN", true);
             payload.router.push({ name: "home" });
             context.commit("UPDATE_FORMACTIVE", true);
@@ -68,7 +76,13 @@ export default new Vuex.Store({
     },
     deslogarUsuario(context) {
       context.commit("UPDATE_FORMACTIVE", false);
-      context.commit("UPDATE_USUARIO", { name: "", email: "", nivel: "" });
+      context.commit("UPDATE_USUARIO", {
+        name: "",
+        email: "",
+        nivel: "",
+        password: undefined,
+        password_confirmation: undefined,
+      });
       context.commit("UPDATE_LOGIN", false);
 
       window.localStorage.removeItem("token");

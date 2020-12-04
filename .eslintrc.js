@@ -14,6 +14,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'quotes': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
   },
 };

@@ -11,6 +11,12 @@
               'Não possui uma conta? Criar Agora.'
             }}
           </a>
+          <a
+            class="btn"
+            @click.prevent="authentication"
+          >
+            {{$store.state.formActive ? 'Cadastrar': 'Entrar'}}
+          </a>
         </Form>
       </CardMain>
     </Card>
@@ -35,6 +41,25 @@ export default {
   methods: {
     actionForms() {
       this.$store.commit('UPDATE_FORMACTIVE', !this.$store.state.formActive);
+    },
+    authentication() {
+      this.$store
+        .dispatch("authentication", {
+          usuario: {
+            name: this.$store.state.usuario.name,
+            email: this.$store.state.usuario.email,
+            password: this.$store.state.usuario.password,
+            password_confirmation: this.$store.state.usuario.password_confirmation,
+          },
+          router: this.$router,
+        })
+        .catch((err) => {
+          this.$store.commit('UPDATE_ERROS', [err.response.data.message]);
+
+          setTimeout(() => {
+            this.$store.commit('UPDATE_ERROS', []);
+          }, 2000);
+        });
     },
   },
 };

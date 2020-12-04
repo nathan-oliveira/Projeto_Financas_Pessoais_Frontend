@@ -1,12 +1,12 @@
 <template>
   <ul
-    v-if="$store.state.login"
-    :class="`sidebar-menu-link ${$store.state.menuActive ? '' : 'visibled'}`">
+    v-if="this.login"
+    :class="`sidebar-menu-link ${this.menuActive ? '' : 'visibled'}`">
     <li>
       <router-link to="/">
         <i class="fas fa-home"></i>
         <p
-          :class="`${$store.state.menuActive ? '' : 'offscreen'}`">Dashboard
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Dashboard
         </p>
       </router-link>
     </li>
@@ -14,7 +14,7 @@
       <router-link to="/">
         <i class="far fa-credit-card"></i>
         <p
-          :class="`${$store.state.menuActive ? '' : 'offscreen'}`">Receitas
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Receitas
         </p>
       </router-link>
     </li>
@@ -22,7 +22,7 @@
       <router-link to="/">
         <i class="fas fa-credit-card"></i>
         <p
-          :class="`${$store.state.menuActive ? '' : 'offscreen'}`">Despesa
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Despesa
         </p>
       </router-link>
     </li>
@@ -30,7 +30,7 @@
       <router-link to="/categoria">
         <i class="fas fa-plus-circle"></i>
         <p @click="actionMenu"
-          :class="`${$store.state.menuActive ? '' : 'offscreen'}`">Categorias
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Categorias
         </p>
       </router-link>
     </li>
@@ -38,9 +38,21 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "NavItem",
-  props: ["menuOwner"],
+  computed: {
+    ...mapState(["login", "menuActive"]),
+    menuOwner() {
+      if (this.$store.state.usuario) {
+        if (this.$store.state.usuario.nivel) {
+          return true;
+        }
+      }
+      return false;
+    },
+  },
   methods: {
     actionMenu() {
       this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
@@ -96,7 +108,7 @@ export default {
 
   .sidebar-menu-link li a p {
     font-size: 1.1rem;
-    margin-left: 0px !important;
+    margin-left: 10px;
   }
 
   .visibled {

@@ -12,7 +12,7 @@
           <ul v-if="$store.state.login">
             <li>
               <div class="dropdown">
-                <Dropdown :titulo="nomeUsuario">
+                <Dropdown :titulo="this.nameUser">
                   <router-link to="/minha-conta">Minha Conta</router-link>
                   <a @click="deslogarUsuario">Sair</a>
                 </Dropdown>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import NavItem from "@/components/layouts/nav/NavItem.vue";
 import Dropdown from "@/components/layouts/nav/Dropdown.vue";
 
@@ -46,6 +47,16 @@ export default {
   components: {
     NavItem,
     Dropdown,
+  },
+  computed: {
+    ...mapState(["usuario"]),
+    nameUser() {
+      if (this.usuario) {
+        return this.usuario.name.split(' ')[0];
+      }
+
+      return "Carregando...";
+    },
   },
   methods: {
     actionMenu() {
