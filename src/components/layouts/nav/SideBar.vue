@@ -1,12 +1,15 @@
 <template>
-  <div class="sidebar" v-if="$store.state.login" @mouseover="actionMenu" @mouseout="actionMenu">
+  <div
+    class="sidebar"
+    v-if="this.$store.state.login"
+    @mouseover="actionMenu"
+    @mouseout="actionMenu"
+  >
     <div class="sidebar-menu">
       <ul class="sidebar-menu-logo">
         <li>
           <router-link to="/">
-            FI<span
-              :class="`${$store.state.menuActive ? '' : 'offscreen'}`"
-            >NANCEIRO</span>
+            FI<span :class="`${$store.state.menuActive ? '' : 'offscreen'}`">NANCEIRO</span>
           </router-link>
         </li>
       </ul>
@@ -36,9 +39,9 @@ export default {
 <style scoped>
 .sidebar {
   padding: 18px 20px;
-  background: linear-gradient(180deg,#4723d9 35%, #87f 100%);
+  background: linear-gradient(180deg, #4723d9 35%, #87f 100%);
   /* background: #4723d9; */
-  border-right: 1px solid linear-gradient(180deg,#4723d9 35%, #87f 100%);
+  border-right: 1px solid linear-gradient(180deg, #4723d9 35%, #87f 100%);
 }
 
 .offscreen {
@@ -62,5 +65,4 @@ export default {
     display: block;
   }
 }
-
 </style>

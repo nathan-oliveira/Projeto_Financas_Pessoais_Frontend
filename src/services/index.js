@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'http://localhost:4000/api',
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -29,13 +29,13 @@ const api = {
     return axiosInstance.put(endpoint, body);
   },
   validateToken() {
-    return axiosInstance.post('http://localhost:4000/validarToken');
+    return axiosInstance.post('http://localhost:4000/api/validarToken');
   },
   login(body, active) {
     if (active) {
-      return axios.post('http://localhost:4000/users', body);
+      return axios.post('http://localhost:4000/api/users', body);
     }
-    return axios.post('http://localhost:4000/session', body);
+    return axios.post('http://localhost:4000/api/session', body);
   },
 };
 

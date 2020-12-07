@@ -56,9 +56,9 @@ export default {
         .catch((err) => {
           this.$store.commit('UPDATE_ERROS', [err.response.data.message]);
 
-          setTimeout(() => {
-            this.$store.commit('UPDATE_ERROS', []);
-          }, 2000);
+          // setTimeout(() => {
+          //   this.$store.commit('UPDATE_ERROS', []);
+          // }, 2000);
         });
     },
   },

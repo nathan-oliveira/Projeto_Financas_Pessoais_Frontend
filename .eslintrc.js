@@ -16,5 +16,6 @@ module.exports = {
     'quotes': 'off',
     'no-param-reassign': 'off',
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+    'quote-props': 'off'
   },
 };

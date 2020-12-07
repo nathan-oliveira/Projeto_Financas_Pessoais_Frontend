@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="form-button">
-      <a class="btn" @click.prevent="adicionarCategoria">Cadastrar</a>
+      <button class="btn" @click.prevent="adicionarCategoria">Cadastrar</button>
     </div>
   </form>
 </template>
@@ -39,19 +39,14 @@ export default {
   },
   methods: {
     adicionarCategoria() {
-      // const button = event.currentTarget;
-      // button.value = "Adicionando...";
-      // button.setAttribute("disabled", "");
-      api.post("/category", { name: this.categoria.name, email: this.categoria.email })
+      api.post("/category", this.categoria)
         .then((resp) => {
-          console.log(resp);
+          // this.$router.push({ name: 'listagemCategoria' });
+          console.log('RESP => ', resp);
         })
         .catch((err) => {
-          console.log(err);
+          console.log('ERR => ', err);
         });
-
-      // button.value = "Cadastrar";
-      // button.removeAttribute("disabled", "");
     },
   },
 };
