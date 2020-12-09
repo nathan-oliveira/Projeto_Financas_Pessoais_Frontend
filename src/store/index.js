@@ -1,92 +1,26 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import api from '@/services';
+
+import { stateUsuario, mutationsUsuario, actionsUsuario } from './usuario';
+import { mutationsAlertas, stateAlertas } from './alertas';
+import { outrosMutations, outrosState } from './outros';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   strict: true,
   state: {
-    loading: false,
-    menuActive: false,
-    formActive: false,
-    login: localStorage.getItem("token"),
-    usuario: {
-      name: "", email: "", nivel: "", password: undefined, password_confirmation: undefined,
-    },
-    erros: [],
-    success: [],
+    ...stateUsuario,
+    ...stateAlertas,
+    ...outrosState,
   },
   mutations: {
-    UPDATE_LOGIN(state, payload) {
-      state.login = payload;
-    },
-    UPDATE_USUARIO(state, payload) {
-      state.usuario = Object.assign(state.usuario, payload);
-    },
-    UPDATE_LOADING(state, payload) {
-      state.loading = payload;
-    },
-    UPDATE_MENUACTIVE(state, payload) {
-      state.menuActive = payload;
-    },
-    UPDATE_FORMACTIVE(state, payload) {
-      state.formActive = payload;
-    },
-    UPDATE_ERROS(state, payload) {
-      state.erros = payload;
-    },
-    UPDATE_SUCCESS(state, payload) {
-      state.success = payload;
-    },
+    ...mutationsUsuario,
+    ...mutationsAlertas,
+    ...outrosMutations,
   },
   actions: {
-    getUsuario() {
-      return api.get("/profile");
-    },
-    updateUser(context, payload) {
-      return api.put("/users", payload);
-    },
-    authentication(context, payload) {
-      return api.login({
-        name: payload.usuario.name,
-        email: payload.usuario.email,
-        password: payload.usuario.password,
-        password_confirmation: payload.usuario.password_confirmation,
-      }, this.state.formActive)
-        .then((resp) => {
-          if (resp.data.token) {
-            localStorage.setItem("token", `Bearer ${resp.data.token}`);
-
-            context.commit("UPDATE_USUARIO", {
-              name: resp.data.name,
-              email: resp.data.email,
-              nivel: resp.data.nivel,
-              password: undefined,
-              password_confirmation: undefined,
-            });
-            context.commit("UPDATE_LOGIN", true);
-            payload.router.push({ name: "home" });
-            context.commit("UPDATE_FORMACTIVE", true);
-          }
-
-          context.commit("UPDATE_FORMACTIVE", false);
-          context.commit("UPDATE_LOADING", false);
-        });
-    },
-    deslogarUsuario(context) {
-      context.commit("UPDATE_FORMACTIVE", false);
-      context.commit("UPDATE_USUARIO", {
-        name: "",
-        email: "",
-        nivel: "",
-        password: undefined,
-        password_confirmation: undefined,
-      });
-      context.commit("UPDATE_LOGIN", false);
-
-      window.localStorage.removeItem("token");
-    },
+    ...actionsUsuario,
   },
   modules: {
   },

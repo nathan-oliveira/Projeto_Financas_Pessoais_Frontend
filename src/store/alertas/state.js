@@ -1,0 +1,4 @@
+export default {
+  erros: [],
+  success: [],
+};

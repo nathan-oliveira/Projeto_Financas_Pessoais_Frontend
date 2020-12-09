@@ -11,12 +11,12 @@
                 : "Não possui uma conta? Criar Agora."
             }}
           </a>
-          <a
+          <button
             class="btn"
             @click.prevent="authentication"
           >
             {{ $store.state.formActive ? "Cadastrar" : "Entrar" }}
-          </a>
+          </button>
         </Form>
       </CardMain>
     </Card>

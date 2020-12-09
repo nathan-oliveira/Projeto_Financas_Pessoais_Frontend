@@ -44,7 +44,7 @@ export default {
   font-size: 12px;
   color: #721c24;
   cursor: pointer;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
 .erros li {

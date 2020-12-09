@@ -10,7 +10,7 @@
       </div>
       <div class="col-2">
         <Form>
-          <a class="btn" @click.prevent="updated">Atualizar</a>
+          <button class="btn" @click.prevent="updated">Atualizar</button>
         </Form>
       </div>
     </div>
@@ -75,7 +75,7 @@ img {
 
 @media screen and (min-width: 740px) {
   .col-2 {
-    margin-top: -10px;
+    margin-top: -5px;
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <transition mode="out-in">
     <ul class="success" v-if="success.length > 0">
-      <p @click="close">x</p>
+      <p @click="close"></p>
       <li v-for="(succ, index) in success" :key="index" v-html="succ"></li>
     </ul>
   </transition>
@@ -38,12 +38,13 @@ export default {
   border-radius: 10px;
 }
 
-.success p {
-  font-size: 19px;
-  font-weight: bold;
-  align-self: flex-end;
+.success p:after {
+  float: right;
+  content: "\274c";
+  font-size: 12px;
   color: #23721c;
   cursor: pointer;
+  margin-top: 4px;
 }
 
 .success li {
