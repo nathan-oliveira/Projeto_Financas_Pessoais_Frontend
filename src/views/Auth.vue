@@ -1,26 +1,29 @@
 <template>
   <section class="content">
     <Card v-if="!$store.state.loading">
-      <CardHeader :title="$store.state.formActive ? 'Criar conta': 'Acessar conta'" />
+      <CardHeader :title="$store.state.formActive ? 'Criar conta' : 'Acessar conta'" />
       <CardMain>
         <Form>
           <a @click="actionForms">
             {{
-              $store.state.formActive ?
-              'Já possui uma conta? Entrar Agora.' :
-              'Não possui uma conta? Criar Agora.'
+              $store.state.formActive
+                ? "Já possui uma conta? Entrar Agora."
+                : "Não possui uma conta? Criar Agora."
             }}
           </a>
           <a
             class="btn"
             @click.prevent="authentication"
           >
-            {{$store.state.formActive ? 'Cadastrar': 'Entrar'}}
+            {{ $store.state.formActive ? "Cadastrar" : "Entrar" }}
           </a>
         </Form>
       </CardMain>
     </Card>
-    <PaginaCarregando key="Carregando" v-else />
+    <PaginaCarregando
+      key="Carregando"
+      v-else
+    />
   </section>
 </template>
 
@@ -40,7 +43,7 @@ export default {
   },
   methods: {
     actionForms() {
-      this.$store.commit('UPDATE_FORMACTIVE', !this.$store.state.formActive);
+      this.$store.commit("UPDATE_FORMACTIVE", !this.$store.state.formActive);
     },
     authentication() {
       this.$store
@@ -54,11 +57,11 @@ export default {
           router: this.$router,
         })
         .catch((err) => {
-          this.$store.commit('UPDATE_ERROS', [err.response.data.message]);
+          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
-          // setTimeout(() => {
-          //   this.$store.commit('UPDATE_ERROS', []);
-          // }, 2000);
+          setTimeout(() => {
+            this.$store.commit("UPDATE_ERROS", []);
+          }, 2000);
         });
     },
   },
