@@ -17,6 +17,9 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     'quote-props': 'off',
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'no-underscore-dangle': 'off',
+    'no-tabs': 'off',
+    'indent': 'off'
   },
 };

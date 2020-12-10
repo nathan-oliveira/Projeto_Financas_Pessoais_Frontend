@@ -1,12 +1,16 @@
 <template>
   <section class="content">
     <Breadcrumb>
-      <BreadcrumbItem titulo="Categorias" asset="Listagens" />
+      <BreadcrumbItem titulo="Categorias" :asset="assetBreadcrumb" />
     </Breadcrumb>
     <div class="grid">
       <nav class="menu">
-        <router-link :to="{ name: 'listagemCategoria' }">Listar</router-link>
-        <router-link :to="{ name: 'cadastrarCategoria' }">Cadastrar</router-link>
+        <router-link :to="{ name: 'listagemCategoria' }" @click.native="alterBread('Listagens')">
+          Listar
+        </router-link>
+        <router-link :to="{ name: 'cadastrarCategoria' }" @click.native="alterBread('Cadastrar')">
+          Cadastrar
+        </router-link>
       </nav>
       <transition mode="out-in">
         <router-view></router-view>
@@ -21,6 +25,16 @@ import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 
 export default {
   name: "Categoria",
+  data() {
+    return {
+      assetBreadcrumb: "Listagens",
+    };
+  },
+  methods: {
+    alterBread(value) {
+      this.assetBreadcrumb = value;
+    },
+  },
   components: {
     Breadcrumb,
     BreadcrumbItem,
