@@ -19,54 +19,39 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item">
-					<button
-            type="button"
-            class="page-link"
-            v-if="page != 1"
-            @click="page--">
-              Previous
-          </button>
-				</li>
-				<li class="page-item">
-					<button
-            type="button"
-            class="page-link"
-            v-for="pageNumber in pages.slice(page - 1, page + 5)" :key="pageNumber"
-            @click="page = pageNumber">
-              {{pageNumber}}
-          </button>
-				</li>
-				<li class="page-item">
-					<button
-            type="button"
-            @click="page++"
-            v-if="page < pages.length"
-            class="page-link">
-            Next
-          </button>
-				</li>
-			</ul>
-		</nav>
-    <!-- <Paginacao
-      :listaTotal="listaTotal"
-      :listaPorPagina="listaPorPagina"
-    /> -->
-    <!-- <PaginaCarregando key="Carregando" v-else /> -->
-  </div>
+    <Paginacao>
+      <a
+        class="page-link"
+        v-if="page != 1"
+        @click="page--">
+          &#8678;
+      </a>
 
+      <a
+        class="page-link"
+        v-for="pageNumber in pages.slice(page - 1, page + 5)" :key="pageNumber"
+        @click="page = pageNumber">
+          {{pageNumber}}
+      </a>
+      <a
+        class="page-link"
+        @click="page++"
+        v-if="page < pages.length"
+        >
+        &#8680;
+      </a>
+    </Paginacao>
+  </div>
 </template>
 
 <script>
-// import Paginacao from "@/components/layouts/paginacao/paginacao.vue";
+import Paginacao from "@/components/layouts/paginacao/paginacao.vue";
 import api from "@/services";
 
 export default {
   name: "Categoria",
   components: {
-    // Paginacao,
+    Paginacao,
   },
   data() {
     return {
@@ -78,10 +63,9 @@ export default {
   },
   methods: {
     getPosts() {
-      api.get("/category")
-        .then((resp) => {
-          this.posts = resp.data;
-        });
+      api.get("/category").then((resp) => {
+        this.posts = resp.data;
+      });
     },
     setPages() {
 			const numberOfPages = Math.ceil(this.posts.length / this.perPage);
@@ -123,6 +107,7 @@ table {
   width: 100%;
   overflow: hidden;
   border-radius: 4px;
+  margin-bottom: 20px !important;
 }
 
 table tbody {
@@ -160,5 +145,20 @@ table thead th {
 
 .col-table-1 {
   width: 9%;
+}
+
+.page-link {
+  border: 1px solid #87f;
+  cursor: pointer;
+  padding: 2px 10px;
+  border-radius: 2px;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.page-link.router-link-exact-active,
+.page-link:hover {
+  background: #87f;
+  color: #fff;
 }
 </style>
