@@ -1,46 +1,51 @@
 <template>
   <div class="listagem">
-    <table v-if="0 === 0">
-      <thead>
-        <tr>
-          <th class="col-table-1">Código</th>
-          <th>Descrição</th>
-          <th class="col-table-acoes">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="dados of displayedPosts" :key="dados.id">
-          <td class="col-table-1">{{ dados.id }}</td>
-          <td>{{ dados.name }}</td>
-          <td class="col-table-acoes">
-            <a href="">Editar</a> &nbsp;
-            <a href="">Excluir</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <Paginacao>
-      <a
-        class="page-link"
-        v-if="page != 1"
-        @click="page--">
-          &#8678;
-      </a>
-
-      <a
-        class="page-link"
-        v-for="pageNumber in pages.slice(page - 1, page + 5)" :key="pageNumber"
-        @click="page = pageNumber">
-          {{pageNumber}}
-      </a>
-      <a
-        class="page-link"
-        @click="page++"
-        v-if="page < pages.length"
-        >
-        &#8680;
-      </a>
-    </Paginacao>
+    <div class="tabela" v-if="!$store.state.loading">
+      <table v-if="0 === 0">
+        <thead>
+          <tr>
+            <th class="col-table-1">Código</th>
+            <th>Descrição</th>
+            <th class="col-table-acoes">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="dados of displayedPosts" :key="dados.id">
+            <td class="col-table-1">{{ dados.id }}</td>
+            <td>{{ dados.name }}</td>
+            <td class="col-table-acoes">
+              <a href="">Editar</a> &nbsp;
+              <a href="">Excluir</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Paginacao :total="pages.length">
+        <a
+          to=""
+          :class="(page == 1) ? 'page-button disabled' : 'page-button'"
+          @click="page--">
+            &#8678;
+        </a>
+        <a
+          class="page-link"
+          v-for="pageNumber in pages" :key="pageNumber"
+          @click="page = pageNumber">
+            {{pageNumber}}
+        </a>
+        <a
+          to=""
+          :class="(page < pages.length) ? 'page-button' : 'page-button disabled'"
+          @click="page++"
+          >
+          &#8680;
+        </a>
+      </Paginacao>
+    </div>
+    <PaginaCarregando
+      key="Carregando"
+      v-else
+    />
   </div>
 </template>
 
@@ -105,7 +110,7 @@ table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  overflow: hidden;
+  border: 1px solid #efefef;
   border-radius: 4px;
   margin-bottom: 20px !important;
 }
@@ -116,7 +121,7 @@ table tbody {
 
 table td,
 table th {
-  padding: 8px;
+  padding: 11px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -130,10 +135,9 @@ table tr:hover {
 }
 
 table thead th {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  height: 45px;
   text-align: left;
-  background: #271181;
+  background: rgba(22, 22, 22, 0.857);
   color: white;
   font-weight: 300;
 }
@@ -146,19 +150,35 @@ table thead th {
 .col-table-1 {
   width: 9%;
 }
-
-.page-link {
-  border: 1px solid #87f;
-  cursor: pointer;
-  padding: 2px 10px;
-  border-radius: 2px;
-  font-size: 20px;
-  margin-right: 10px;
+.page-font {
+  font-size: 17 !important;
 }
 
-.page-link.router-link-exact-active,
-.page-link:hover {
-  background: #87f;
+.page-button {
+  font-size: 20px;
+  padding: 0px 10px 0px 13px;
+}
+
+.page-link {
+  font-size: 18px;
+  padding: 2px 12px 1px 16px;
+}
+
+.page-button,
+.page-link {
+  border: 1px solid #484848eb;
+  cursor: pointer;
+  border-radius: 2px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.pagination a:hover {
+  background: rgba(22, 22, 22, 0.829);
   color: #fff;
+}
+
+.disabled {
+  pointer-events: none;
 }
 </style>
