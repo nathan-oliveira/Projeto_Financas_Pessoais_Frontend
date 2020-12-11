@@ -3,7 +3,7 @@
     <Breadcrumb>
       <BreadcrumbItem titulo="Minha Conta" asset="Informações de Usuário" />
     </Breadcrumb>
-    <div class="grid">
+    <div class="grid" v-if="!$store.state.loading">
       <div class="col-1">
         <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png" width="200px" />
         <p>Atualizar Imagem</p>
@@ -14,6 +14,10 @@
         </Form>
       </div>
     </div>
+    <PaginaCarregando
+      key="Carregando"
+      v-else
+    />
   </section>
 </template>
 
@@ -28,6 +32,13 @@ export default {
     Breadcrumb,
     BreadcrumbItem,
     Form,
+  },
+  created() {
+    this.$store.commit("UPDATE_LOADING", true);
+
+    setTimeout(() => {
+      this.$store.commit("UPDATE_LOADING", false);
+    }, 500);
   },
   methods: {
     async updated() {

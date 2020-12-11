@@ -1,7 +1,7 @@
 <template>
   <div class="listagem">
     <div class="tabela" v-if="!$store.state.loading">
-      <table v-if="0 === 0">
+      <table>
         <thead>
           <tr>
             <th class="col-table-1">Código</th>
@@ -14,8 +14,12 @@
             <td class="col-table-1">{{ dados.id }}</td>
             <td>{{ dados.name }}</td>
             <td class="col-table-acoes">
-              <a href="">Editar</a> &nbsp;
-              <a href="">Excluir</a>
+              <a href="">
+                <img class="edit-icon" src="@/assets/edit-solid.svg" alt="edit"/>
+              </a> &nbsp;
+              <a href="">
+                <img class="trash-icon" src="@/assets/trash-alt-solid.svg" alt="trash"/>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -70,6 +74,7 @@ export default {
     getPosts() {
       api.get("/category").then((resp) => {
         this.posts = resp.data;
+        this.$store.commit("UPDATE_LOADING", false);
       });
     },
     setPages() {
@@ -95,6 +100,7 @@ export default {
     },
   },
   created() {
+    this.$store.commit("UPDATE_LOADING", true);
     this.getPosts();
   },
   filters: {
@@ -106,17 +112,21 @@ export default {
 </script>
 
 <style scoped>
+.trash-icon {
+  width: 17px;
+}
+
+.edit-icon {
+  width: 22px;
+}
+
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  border: 1px solid #efefef;
+  border: 1px solid #8e8e8e73;
   border-radius: 4px;
   margin-bottom: 20px !important;
-}
-
-table tbody {
-  border: 1px solid #efefef;
 }
 
 table td,
@@ -144,7 +154,20 @@ table thead th {
 
 .col-table-acoes {
   text-align: center;
-  width: 15%;
+  width: 10%;
+}
+
+@media screen and (max-width: 1072px) {
+  .col-table-acoes {
+    width: 18%;
+  }
+}
+
+@media screen and (max-width: 538px) {
+  .col-table-acoes {
+    text-align: center;
+    width: 29%;
+  }
 }
 
 .col-table-1 {
