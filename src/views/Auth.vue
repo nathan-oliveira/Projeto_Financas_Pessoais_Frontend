@@ -58,7 +58,7 @@ export default {
 
           setTimeout(() => {
             this.$store.commit("UPDATE_ERROS", []);
-          }, 2000);
+          }, 3000);
         });
     },
   },

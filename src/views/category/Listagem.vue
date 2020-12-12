@@ -1,7 +1,7 @@
 <template>
   <div class="listagem">
     <div class="tabela" v-if="!$store.state.loading">
-      <table>
+      <table v-if="this.posts.length > 0">
         <thead>
           <tr>
             <th class="col-table-1">Código</th>
@@ -33,7 +33,16 @@
           </tr>
         </tbody>
       </table>
-      <Paginacao :total="pages.length">
+      <div class="content-noitens" v-else>
+        <h1 class="noitens">Nenhum registro encontrado!</h1>
+        <router-link
+          class="btn btn-cadastro"
+          :to="{ name: 'cadastrarCategoria' }"
+        >
+          Criar agora!
+        </router-link>
+      </div>
+      <Paginacao :total="pages.length" v-if="this.posts.length > 0">
         <a
           :class="page == 1 ? 'page-button disabled' : 'page-button'"
           @click="page--"
@@ -72,7 +81,7 @@ export default {
   },
   data() {
     return {
-      posts: [""],
+      posts: [],
       page: 1,
       perPage: 9,
       pages: [],
@@ -142,7 +151,7 @@ export default {
 
 .btn {
   border: 1px solid transparent;
-  padding: 3px 8px 3px 8px !important;
+  padding: 3px 8px 3px 8px;
   border-radius: 5px;
   display: inline-flex;
   cursor: pointer;

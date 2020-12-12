@@ -1,7 +1,11 @@
 <template>
   <nav class="navigation">
-    <ul class="l">
-      Total de {{total}} Páginas.
+    <ul class="total">
+      Total de
+      {{
+        total
+      }}
+      Páginas.
     </ul>
     <ul class="pagination">
       <slot></slot>

@@ -43,17 +43,27 @@ export default {
     };
   },
   methods: {
-    adicionarCategoria() {
-      api.post("/category", this.categoria)
+    adicionarCategoria(event) {
+      event.target.classList.toggle("disabled");
+
+      api
+        .post("/category", this.categoria)
         .then(() => {
-          this.$router.push({ name: 'listagemCategoria' });
+          this.$router.push({ name: "listagemCategoria" });
         })
         .catch((err) => {
-          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
+          event.target.classList.toggle("disabled");
+          if (err.response.data.message) {
+            this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
+          } else {
+            this.$store.commit("UPDATE_ERROS", [
+              "Categoria e Icone deve conter no mínimo 6 caracteres.",
+            ]);
+          }
 
           setTimeout(() => {
             this.$store.commit("UPDATE_ERROS", []);
-          }, 2000);
+          }, 3000);
         });
     },
   },

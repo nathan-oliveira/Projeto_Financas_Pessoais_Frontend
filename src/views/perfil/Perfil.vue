@@ -5,7 +5,10 @@
     </Breadcrumb>
     <div class="grid" v-if="!$store.state.loading">
       <div class="col-1">
-        <img src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png" width="200px" />
+        <img
+          src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png"
+          width="200px"
+        />
         <p>Atualizar Imagem</p>
       </div>
       <div class="col-2">
@@ -14,10 +17,7 @@
         </Form>
       </div>
     </div>
-    <PaginaCarregando
-      key="Carregando"
-      v-else
-    />
+    <PaginaCarregando key="Carregando" v-else />
   </section>
 </template>
 
@@ -45,19 +45,25 @@ export default {
       this.$store
         .dispatch("updateUser", this.$store.state.usuario)
         .then((resp) => {
-          this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
-          this.$store.commit('UPDATE_SUCCESS', ["Perfil atualizado com sucesso!"]);
+          this.$store.commit("UPDATE_USUARIO", {
+            name: resp.data.name,
+            email: resp.data.email,
+            nivel: resp.data.nivel,
+          });
+          this.$store.commit("UPDATE_SUCCESS", [
+            "Perfil atualizado com sucesso!",
+          ]);
 
           setTimeout(() => {
-            this.$store.commit('UPDATE_SUCCESS', []);
-          }, 2000);
+            this.$store.commit("UPDATE_SUCCESS", []);
+          }, 3000);
         })
         .catch((err) => {
-          this.$store.commit('UPDATE_ERROS', [err.response.data.message]);
+          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
           setTimeout(() => {
-            this.$store.commit('UPDATE_ERROS', []);
-          }, 2000);
+            this.$store.commit("UPDATE_ERROS", []);
+          }, 3000);
         });
     },
   },

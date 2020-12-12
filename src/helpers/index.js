@@ -27,8 +27,6 @@ export function mapFields(options) {
 
 export const swalDeleteQuestion = {
   title: "Você tem certeza?",
-  type: "warning",
-  width: 400,
   text: "Não poderá reverter á operação!",
   icon: "warning",
   showCancelButton: true,

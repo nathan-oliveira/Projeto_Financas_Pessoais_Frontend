@@ -56,7 +56,6 @@ export default {
   margin-bottom: 10px;
   border-radius: 4px;
   color: rgb(7, 0, 0);
-  border: 1px solid #efefefa8;
 }
 
 .menu a.router-link-exact-active,
