@@ -22,7 +22,7 @@
                 />
               </button>
               &nbsp;
-              <button @click="excluir(dados.id)" class="btn btn-red">
+              <button @click="excluir(dados)" class="btn btn-red">
                 <img
                   class="trash-icon"
                   src="@/assets/trash-alt-solid.svg"
@@ -79,11 +79,12 @@ export default {
     };
   },
   methods: {
-    excluir(id) {
+    excluir(obj) {
       this.$swal(swalDeleteQuestion).then((result) => {
         if (result.value) {
-          api.delete(`/category/${id}`).then(() => {
-            this.$router.go(0);
+          api.delete(`/category/${obj.id}`).then(async () => {
+            this.pages = [];
+            this.posts = this.posts.filter((item) => item !== obj);
             this.$swal(swalDeleteOk);
           });
         }

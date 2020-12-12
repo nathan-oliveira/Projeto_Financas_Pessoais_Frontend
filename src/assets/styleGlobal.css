@@ -210,19 +210,16 @@ table thead th {
 
 @media screen and (max-width: 1072px) {
   .col-table-acoes {
-    width: 16%;
+    width: 20%;
   }
 }
 
-@media screen and (max-width: 765px) {
-  .col-table-acoes {
-    width: 38%;
-  }
-}
-
-@media screen and (max-width: 461px) {
+@media screen and (max-width: 583px) {
   .col-table-1 {
     display: none;
+  }
+  .col-table-acoes {
+    width: 38%;
   }
 }
 
