@@ -24,3 +24,24 @@ export function mapFields(options) {
   }
   return object;
 }
+
+export const swalDeleteQuestion = {
+  title: "Você tem certeza?",
+  type: "warning",
+  width: 400,
+  text: "Não poderá reverter á operação!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  cancelButtonText: "Não. Retornar!",
+  confirmButtonText: "Sim. Prosseguir!",
+};
+
+export const swalDeleteOk = {
+  title: "Deletado!",
+  text: "Operação realizado com sucesso!",
+  icon: "success",
+  showConfirmButton: false,
+  timer: 1500,
+};

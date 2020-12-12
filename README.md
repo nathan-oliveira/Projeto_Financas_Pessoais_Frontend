@@ -22,3 +22,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+https://www.digitalocean.com/community/tutorials/vuejs-vue-sweetalert2

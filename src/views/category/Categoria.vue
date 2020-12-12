@@ -5,10 +5,16 @@
     </Breadcrumb>
     <div class="grid">
       <nav class="menu">
-        <router-link :to="{ name: 'listagemCategoria' }" @click.native="alterBread('Listagens')">
+        <router-link
+          :to="{ name: 'listagemCategoria' }"
+          @click.native="alterBread('Listagens')"
+        >
           Listar
         </router-link>
-        <router-link :to="{ name: 'cadastrarCategoria' }" @click.native="alterBread('Cadastrar')">
+        <router-link
+          :to="{ name: 'cadastrarCategoria' }"
+          @click.native="alterBread('Cadastrar')"
+        >
           Cadastrar
         </router-link>
       </nav>
@@ -55,7 +61,7 @@ export default {
 
 .menu a.router-link-exact-active,
 .menu a:hover {
-  background: linear-gradient(90deg,#271181 40%, #87f 100%);
+  background: linear-gradient(90deg, #271181 40%, #87f 100%);
   color: white;
   border: none;
 }

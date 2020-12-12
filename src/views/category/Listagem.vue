@@ -10,50 +10,58 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dados of displayedPosts" :key="dados.id">
+          <tr v-for="dados of displayedList" :key="dados.id">
             <td class="col-table-1">{{ dados.id }}</td>
             <td>{{ dados.name }}</td>
             <td class="col-table-acoes">
-              <a href="">
-                <img class="edit-icon" src="@/assets/edit-solid.svg" alt="edit"/>
-              </a> &nbsp;
-              <a href="">
-                <img class="trash-icon" src="@/assets/trash-alt-solid.svg" alt="trash"/>
-              </a>
+              <button class="btn btn-black">
+                <img
+                  class="edit-icon"
+                  src="@/assets/edit-solid.svg"
+                  alt="edit"
+                />
+              </button>
+              &nbsp;
+              <button @click="excluir(dados.id)" class="btn btn-red">
+                <img
+                  class="trash-icon"
+                  src="@/assets/trash-alt-solid.svg"
+                  alt="trash"
+                />
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
       <Paginacao :total="pages.length">
         <a
-          to=""
-          :class="(page == 1) ? 'page-button disabled' : 'page-button'"
-          @click="page--">
-            &#8678;
+          :class="page == 1 ? 'page-button disabled' : 'page-button'"
+          @click="page--"
+        >
+          &#8678;
         </a>
         <a
           class="page-link"
-          v-for="pageNumber in pages" :key="pageNumber"
-          @click="page = pageNumber">
-            {{pageNumber}}
+          v-for="pageNumber in pages.slice(page - 1, page + 2)"
+          :key="pageNumber"
+          @click="page = pageNumber"
+        >
+          {{ pageNumber }}
         </a>
         <a
-          to=""
-          :class="(page < pages.length) ? 'page-button' : 'page-button disabled'"
+          :class="page < pages.length ? 'page-button' : 'page-button disabled'"
           @click="page++"
-          >
+        >
           &#8680;
         </a>
       </Paginacao>
     </div>
-    <PaginaCarregando
-      key="Carregando"
-      v-else
-    />
+    <PaginaCarregando key="Carregando" v-else />
   </div>
 </template>
 
 <script>
+import { swalDeleteQuestion, swalDeleteOk } from "@/helpers";
 import Paginacao from "@/components/layouts/paginacao/paginacao.vue";
 import api from "@/services";
 
@@ -64,13 +72,24 @@ export default {
   },
   data() {
     return {
-      posts: [''],
-			page: 1,
-			perPage: 9,
-			pages: [],
+      posts: [""],
+      page: 1,
+      perPage: 9,
+      pages: [],
     };
   },
   methods: {
+    excluir(id) {
+      this.$swal(swalDeleteQuestion).then((result) => {
+        if (result.value) {
+          api.delete(`/category/${id}`).then(() => {
+            this.$router.go(0);
+            this.$swal(swalDeleteOk);
+          });
+        }
+      });
+    },
+    // Methods Pagination
     getPosts() {
       api.get("/category").then((resp) => {
         this.posts = resp.data;
@@ -78,19 +97,19 @@ export default {
       });
     },
     setPages() {
-			const numberOfPages = Math.ceil(this.posts.length / this.perPage);
-			for (let index = 1; index <= numberOfPages; index++) {
-				this.pages.push(index);
-			}
-		},
-		paginate(posts) {
-			const from = (this.page * this.perPage) - this.perPage;
-			const to = (this.page * this.perPage);
-			return posts.slice(from, to);
+      const numberOfPages = Math.ceil(this.posts.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate(posts) {
+      const from = this.page * this.perPage - this.perPage;
+      const to = this.page * this.perPage;
+      return posts.slice(from, to);
     },
   },
   computed: {
-    displayedPosts() {
+    displayedList() {
       return this.paginate(this.posts);
     },
   },
@@ -120,88 +139,20 @@ export default {
   width: 22px;
 }
 
-table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #8e8e8e73;
-  border-radius: 4px;
-  margin-bottom: 20px !important;
-}
-
-table td,
-table th {
-  padding: 11px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:hover {
-  background-color: #ddd;
-}
-
-table thead th {
-  height: 45px;
-  text-align: left;
-  background: rgba(22, 22, 22, 0.857);
-  color: white;
-  font-weight: 300;
-}
-
-.col-table-acoes {
-  text-align: center;
-  width: 10%;
-}
-
-@media screen and (max-width: 1072px) {
-  .col-table-acoes {
-    width: 18%;
-  }
-}
-
-@media screen and (max-width: 538px) {
-  .col-table-acoes {
-    text-align: center;
-    width: 29%;
-  }
-}
-
-.col-table-1 {
-  width: 9%;
-}
-.page-font {
-  font-size: 17 !important;
-}
-
-.page-button {
-  font-size: 20px;
-  padding: 0px 10px 0px 13px;
-}
-
-.page-link {
-  font-size: 18px;
-  padding: 2px 12px 1px 16px;
-}
-
-.page-button,
-.page-link {
-  border: 1px solid #484848eb;
+.btn {
+  border: 1px solid transparent;
+  padding: 3px 8px 3px 8px !important;
+  border-radius: 5px;
+  display: inline-flex;
   cursor: pointer;
-  border-radius: 2px;
-  margin-left: 10px;
-  text-align: center;
 }
 
-.pagination a:hover {
-  background: rgba(22, 22, 22, 0.829);
-  color: #fff;
+.btn-red {
+  background: #b31919;
 }
 
-.disabled {
-  pointer-events: none;
+.btn-black {
+  padding: 3px 4px 3px 7px !important;
+  background: #252525;
 }
 </style>

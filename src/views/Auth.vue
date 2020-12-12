@@ -1,7 +1,9 @@
 <template>
   <section class="content">
     <Card v-if="!$store.state.loading">
-      <CardHeader :title="$store.state.formActive ? 'Criar conta' : 'Acessar conta'" />
+      <CardHeader
+        :title="$store.state.formActive ? 'Criar conta' : 'Acessar conta'"
+      />
       <CardMain>
         <Form>
           <a @click="actionForms">
@@ -11,19 +13,13 @@
                 : "Não possui uma conta? Criar Agora."
             }}
           </a>
-          <button
-            class="btn"
-            @click.prevent="authentication"
-          >
+          <button class="btn" @click.prevent="authentication">
             {{ $store.state.formActive ? "Cadastrar" : "Entrar" }}
           </button>
         </Form>
       </CardMain>
     </Card>
-    <PaginaCarregando
-      key="Carregando"
-      v-else
-    />
+    <PaginaCarregando key="Carregando" v-else />
   </section>
 </template>
 
@@ -52,7 +48,8 @@ export default {
             name: this.$store.state.usuario.name,
             email: this.$store.state.usuario.email,
             password: this.$store.state.usuario.password,
-            password_confirmation: this.$store.state.usuario.password_confirmation,
+            password_confirmation: this.$store.state.usuario
+              .password_confirmation,
           },
           router: this.$router,
         })
@@ -70,7 +67,7 @@ export default {
 
 <style scoped>
 .content {
-  background: #f7f6fb;
+  /* background: #f7f6fb; */
   margin: 0 auto;
   display: flex;
   align-items: center !important;

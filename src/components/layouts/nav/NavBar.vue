@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="menu">
+    <header :class="!$store.state.login ? 'menu' : 'menu bg-menu'">
       <nav class="container">
         <div class="menu-logo">
           <a @click="actionMenu" v-if="$store.state.login">
@@ -52,7 +52,7 @@ export default {
     ...mapState(["usuario"]),
     nameUser() {
       if (this.usuario) {
-        return this.usuario.name.split(' ')[0];
+        return this.usuario.name.split(" ")[0];
       }
 
       return "Carregando...";
@@ -80,9 +80,12 @@ a {
 }
 
 .menu {
-  background: #f7f6fb;
   padding: 15px 10px;
   border-bottom: 1px solid #efefefa8;
+}
+
+.bg-menu {
+  background: #f7f6fb;
 }
 
 .menu-nav a {
