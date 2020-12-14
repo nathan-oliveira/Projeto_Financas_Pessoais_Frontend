@@ -27,8 +27,8 @@
       </router-link>
     </li>
     <li>
-      <router-link to="/">
-        <i class="fas fa-credit-card"></i>
+      <router-link to="/metas">
+        <i class="fas fa-chart-line"></i>
         <p
           :class="`${this.menuActive ? '' : 'offscreen'}`">Metas
         </p>

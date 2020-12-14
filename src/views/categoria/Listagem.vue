@@ -1,5 +1,5 @@
 <template>
-  <div class="listagem">
+  <section>
     <div class="tabela" v-if="!$store.state.loading">
       <table v-if="this.posts.length > 0">
         <thead>
@@ -58,7 +58,7 @@
       </Paginacao>
     </div>
     <PaginaCarregando key="Carregando" v-else />
-  </div>
+  </section>
 </template>
 
 <script>

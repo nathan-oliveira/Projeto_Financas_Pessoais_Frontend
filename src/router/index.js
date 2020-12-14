@@ -26,7 +26,7 @@ const routes = [
   },
   {
     path: '/categoria',
-    component: () => import('../views/category/Categoria.vue'),
+    component: () => import('../views/categoria/Categoria.vue'),
     meta: {
       login: true,
     },
@@ -34,19 +34,26 @@ const routes = [
       {
         path: '',
         name: 'listagemCategoria',
-        component: () => import('../views/category/Listagem.vue'),
+        component: () => import('../views/categoria/Listagem.vue'),
       },
       {
         path: 'cadastrar',
         name: 'cadastrarCategoria',
-        component: () => import('../views/category/Cadastrar.vue'),
+        component: () => import('../views/categoria/Cadastrar.vue'),
       },
       {
         path: 'editar/:id',
         name: 'editarCategoria',
-        component: () => import('../views/category/Editar.vue'),
+        component: () => import('../views/categoria/Editar.vue'),
       }
     ],
+  },
+  {
+    path: '/metas',
+    component: () => import('../views/metas/Metas.vue'),
+    meta: {
+      login: true,
+    },
   },
   {
     path: '/minha-conta',

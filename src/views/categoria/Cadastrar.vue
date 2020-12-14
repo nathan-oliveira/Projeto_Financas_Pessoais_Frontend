@@ -1,28 +1,30 @@
 <template>
-  <form class="form">
-    <MensagemErro />
-    <div class="grid">
-      <div class="form-group">
-        <label>Categoria:</label>
-        <input
-          type="text"
-          placeholder="Nome da Categoria"
-          v-model="categoria.name"
-        />
+  <section>
+    <form class="form">
+      <MensagemErro />
+      <div class="grid">
+        <div class="form-group">
+          <label>Categoria:</label>
+          <input
+            type="text"
+            placeholder="Nome da Categoria"
+            v-model="categoria.name"
+          />
+        </div>
+        <div class="form-group">
+          <label>Icone:</label>
+          <input
+            type="text"
+            placeholder="URL do icone"
+            v-model="categoria.icon"
+          />
+        </div>
       </div>
-      <div class="form-group">
-        <label>Icone:</label>
-        <input
-          type="text"
-          placeholder="URL do icone"
-          v-model="categoria.icon"
-        />
+      <div class="form-button">
+        <button class="btn" @click.prevent="adicionarCategoria">Cadastrar</button>
       </div>
-    </div>
-    <div class="form-button">
-      <button class="btn" @click.prevent="adicionarCategoria">Cadastrar</button>
-    </div>
-  </form>
+    </form>
+  </section>
 </template>
 
 <script>

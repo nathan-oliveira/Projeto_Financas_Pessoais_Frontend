@@ -31,6 +31,10 @@ import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 
 export default {
   name: "Categoria",
+  components: {
+    Breadcrumb,
+    BreadcrumbItem,
+  },
   mounted() {
     this.alterBread('Listagens');
   },
@@ -39,10 +43,6 @@ export default {
       const bread = document.getElementById("categoriaBreadcrumbItem");
       bread.innerText = value;
     },
-  },
-  components: {
-    Breadcrumb,
-    BreadcrumbItem,
   },
 };
 </script>

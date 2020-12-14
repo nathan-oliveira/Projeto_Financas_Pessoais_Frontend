@@ -1,5 +1,5 @@
 <template>
-  <div class="editar-categoria">
+  <section>
     <MensagemErro />
     <form class="form" v-if="registro">
       <div class="grid">
@@ -25,7 +25,7 @@
         id="atualizar">Atualizar</button>
       </div>
     </form>
-  </div>
+  </section>
 </template>
 
 <script>
