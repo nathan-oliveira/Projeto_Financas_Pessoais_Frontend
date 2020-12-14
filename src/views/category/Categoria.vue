@@ -1,7 +1,7 @@
 <template>
   <section class="content">
     <Breadcrumb>
-      <BreadcrumbItem titulo="Categorias" :asset="assetBreadcrumb" />
+      <BreadcrumbItem titulo="Categorias" id="categoriaBreadcrumbItem" />
     </Breadcrumb>
     <div class="grid">
       <nav class="menu">
@@ -36,9 +36,13 @@ export default {
       assetBreadcrumb: "Listagens",
     };
   },
+  mounted() {
+    this.alterBread('Listagens');
+  },
   methods: {
     alterBread(value) {
-      this.assetBreadcrumb = value;
+      const bread = document.getElementById("categoriaBreadcrumbItem");
+      bread.innerText = value;
     },
   },
   components: {

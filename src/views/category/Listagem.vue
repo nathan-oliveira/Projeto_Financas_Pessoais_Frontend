@@ -14,7 +14,7 @@
             <td class="col-table-1">{{ dados.id }}</td>
             <td>{{ dados.name }}</td>
             <td class="col-table-acoes">
-              <button class="btn btn-black">
+              <button @click="editar(dados)" class="btn btn-black">
                 <img
                   class="edit-icon"
                   src="@/assets/edit-solid.svg"
@@ -98,6 +98,9 @@ export default {
           });
         }
       });
+    },
+    editar(obj) {
+      this.$router.push(`/categoria/editar/${obj.id}`);
     },
     // Methods Pagination
     getPosts() {

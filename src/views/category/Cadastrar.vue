@@ -46,8 +46,7 @@ export default {
     adicionarCategoria(event) {
       event.target.classList.toggle("disabled");
 
-      api
-        .post("/category", this.categoria)
+      api.post("/category", this.categoria)
         .then(() => {
           this.$router.push({ name: "listagemCategoria" });
         })

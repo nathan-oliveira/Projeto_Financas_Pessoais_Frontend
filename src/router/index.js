@@ -41,6 +41,12 @@ const routes = [
         name: 'cadastrarCategoria',
         component: () => import('../views/category/Cadastrar.vue'),
       },
+      {
+        path: 'editar/:id',
+        name: 'editarCategoria',
+        component: () => import('../views/category/Editar.vue'),
+
+      }
     ],
   },
   {

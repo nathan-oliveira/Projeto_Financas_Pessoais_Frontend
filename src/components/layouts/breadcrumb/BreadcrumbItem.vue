@@ -1,13 +1,13 @@
 <template>
   <li>
-    <ul>{{ titulo }} <small>{{asset}}</small></ul>
+    <ul>{{ titulo }} <small :id="id">{{asset}}</small></ul>
   </li>
 </template>
 
 <script>
 export default {
   name: "BreadcrumbItem",
-  props: ["titulo", "asset"],
+  props: ["titulo", "asset", "id"],
 };
 </script>
 
