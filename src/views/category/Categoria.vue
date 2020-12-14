@@ -31,11 +31,6 @@ import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 
 export default {
   name: "Categoria",
-  data() {
-    return {
-      assetBreadcrumb: "Listagens",
-    };
-  },
   mounted() {
     this.alterBread('Listagens');
   },

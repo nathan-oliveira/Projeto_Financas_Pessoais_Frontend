@@ -15,19 +15,11 @@
             <td>{{ dados.name }}</td>
             <td class="col-table-acoes">
               <button @click="editar(dados)" class="btn btn-black">
-                <img
-                  class="edit-icon"
-                  src="@/assets/edit-solid.svg"
-                  alt="edit"
-                />
+                <i class="fas fa-edit"></i>
               </button>
               &nbsp;
               <button @click="excluir(dados)" class="btn btn-red">
-                <img
-                  class="trash-icon"
-                  src="@/assets/trash-alt-solid.svg"
-                  alt="trash"
-                />
+                <i class="fas fa-trash-alt"></i>
               </button>
             </td>
           </tr>
@@ -144,14 +136,6 @@ export default {
 </script>
 
 <style scoped>
-.trash-icon {
-  width: 17px;
-}
-
-.edit-icon {
-  width: 22px;
-}
-
 .btn {
   border: 1px solid transparent;
   padding: 3px 8px 3px 8px;
@@ -165,7 +149,7 @@ export default {
 }
 
 .btn-black {
-  padding: 3px 4px 3px 7px !important;
+  padding: 3px 5px 3px 7px;
   background: #252525;
 }
 </style>

@@ -45,7 +45,6 @@ const routes = [
         path: 'editar/:id',
         name: 'editarCategoria',
         component: () => import('../views/category/Editar.vue'),
-
       }
     ],
   },

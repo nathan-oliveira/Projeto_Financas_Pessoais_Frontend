@@ -26,6 +26,14 @@
         </p>
       </router-link>
     </li>
+    <li>
+      <router-link to="/">
+        <i class="fas fa-credit-card"></i>
+        <p
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Metas
+        </p>
+      </router-link>
+    </li>
     <li v-if="menuOwner">
       <router-link to="/categoria">
         <i class="fas fa-plus-circle"></i>

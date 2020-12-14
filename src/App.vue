@@ -31,6 +31,7 @@ export default {
             });
         })
         .catch(() => {
+          this.$store.dispatch("deslogarUsuario");
           window.localStorage.removeItem("token");
           this.$router.push("/authentication");
         });
