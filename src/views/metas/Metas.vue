@@ -3,6 +3,25 @@
     <Breadcrumb>
       <BreadcrumbItem titulo="Metas" id="metasBreadcrumbItem" />
     </Breadcrumb>
+    <div class="grid">
+      <nav class="menu-pages">
+        <router-link
+          :to="{ name: 'listagemMetas' }"
+          @click.native="alterBread('Listagens')"
+        >
+          Listar
+        </router-link>
+        <router-link
+          :to="{ name: 'cadastrarCategoria' }"
+          @click.native="alterBread('Cadastrar')"
+        >
+          Cadastrar
+        </router-link>
+      </nav>
+      <transition mode="out-in">
+        <router-view></router-view>
+      </transition>
+    </div>
   </section>
 </template>
 
@@ -15,6 +34,15 @@ export default {
   components: {
     Breadcrumb,
     BreadcrumbItem,
+  },
+  mounted() {
+    this.alterBread('Listagens');
+  },
+  methods: {
+    alterBread(value) {
+      const bread = document.getElementById("metasBreadcrumbItem");
+      bread.innerText = value;
+    },
   },
 };
 </script>

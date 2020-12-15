@@ -4,7 +4,7 @@
       <BreadcrumbItem titulo="Categorias" id="categoriaBreadcrumbItem" />
     </Breadcrumb>
     <div class="grid">
-      <nav class="menu">
+      <nav class="menu-pages">
         <router-link
           :to="{ name: 'listagemCategoria' }"
           @click.native="alterBread('Listagens')"
@@ -46,21 +46,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.menu a {
-  padding: 10px 20px;
-  display: block;
-  background: #f4f7fc;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  color: rgb(7, 0, 0);
-}
-
-.menu a.router-link-exact-active,
-.menu a:hover {
-  background: linear-gradient(90deg, #271181 40%, #87f 100%);
-  color: white;
-  border: none;
-}
-</style>

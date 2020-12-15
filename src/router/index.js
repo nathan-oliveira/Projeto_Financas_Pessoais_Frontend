@@ -54,6 +54,13 @@ const routes = [
     meta: {
       login: true,
     },
+    children: [
+      {
+        path: '',
+        name: 'listagemMetas',
+        component: () => import('../views/metas/Listagem.vue'),
+      },
+    ],
   },
   {
     path: '/minha-conta',

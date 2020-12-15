@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import { stateUsuario, mutationsUsuario, actionsUsuario } from './usuario';
 import { mutationsAlertas, stateAlertas } from './alertas';
 import { outrosMutations, outrosState } from './outros';
+import { tableState, mutationsTable, actionsTable } from './table';
 
 Vue.use(Vuex);
 
@@ -13,14 +14,17 @@ export default new Vuex.Store({
     ...stateUsuario,
     ...stateAlertas,
     ...outrosState,
+    ...tableState,
   },
   mutations: {
     ...mutationsUsuario,
     ...mutationsAlertas,
     ...outrosMutations,
+    ...mutationsTable,
   },
   actions: {
     ...actionsUsuario,
+    ...actionsTable,
   },
   modules: {
   },

@@ -33,7 +33,7 @@ import MensagemErro from "@/components/layouts/MensagemErro.vue";
 import api from "@/services";
 
 export default {
-  name: "Editar",
+  name: "categoriaEditar",
   props: ["id"],
   components: {
     MensagemErro,
