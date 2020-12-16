@@ -209,12 +209,18 @@ table thead th {
 
 .col-table-acoes {
   text-align: center;
-  width: 15%
+  width: 12%
 }
 
-@media screen and (max-width: 1007px) {
+@media screen and (max-width: 1189px) {
   .col-table-acoes {
     width: 20%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .col-table-acoes {
+    width: 22%;
   }
 }
 
@@ -325,17 +331,11 @@ table thead th {
   .noitens {
     width: 89%;
   }
-  .btn-cadastro {
-    width: 10%;
-  }
 }
 
 @media screen and (max-width: 780px) {
   .noitens {
     font-size: 20px;
-  }
-  .btn-cadastro {
-    width: 32%;
   }
 }
 

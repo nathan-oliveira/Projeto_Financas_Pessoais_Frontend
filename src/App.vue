@@ -35,6 +35,8 @@ export default {
           window.localStorage.removeItem("token");
           this.$router.push("/authentication");
         });
+    } else {
+      this.$store.dispatch("deslogarUsuario");
     }
   },
 };

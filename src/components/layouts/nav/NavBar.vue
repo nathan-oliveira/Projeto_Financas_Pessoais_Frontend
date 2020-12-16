@@ -6,7 +6,7 @@
           <a @click="actionMenu" v-if="$store.state.login">
             <img src="@/assets/menu.svg" />
           </a>
-          <span v-else>APP Financeiro</span>
+          <span v-else>Financeiro</span>
         </div>
         <div class="menu-nav">
           <ul v-if="$store.state.login">
