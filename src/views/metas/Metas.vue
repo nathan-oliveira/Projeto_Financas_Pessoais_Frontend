@@ -12,7 +12,7 @@
           Listar
         </router-link>
         <router-link
-          :to="{ name: 'cadastrarCategoria' }"
+          :to="{ name: 'cadastrarMetas' }"
           @click.native="alterBread('Cadastrar')"
         >
           Cadastrar

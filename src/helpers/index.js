@@ -25,6 +25,25 @@ export function mapFields(options) {
   return object;
 }
 
+export function paginate(state) {
+  const from = state.page * state.perPage - state.perPage;
+  const to = state.page * state.perPage;
+  return state.posts.slice(from, to);
+}
+
+export function numeroPreco(valor) {
+  valor = Number(valor);
+
+  if (!Number.isNaN(valor)) {
+    return valor.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+  }
+
+  return "";
+}
+
 export const swalDeleteQuestion = {
   title: "Você tem certeza?",
   text: "Não poderá reverter á operação!",

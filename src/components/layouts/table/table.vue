@@ -15,7 +15,8 @@
           <td
             v-for="(item, index2) in dados"
             :key="item.id"
-            :class="(index2 === 'id') ? 'col-table-1' : `col-table-${index+2}`"
+            :class="(index2 === 'id') ? 'col-table-1' :
+              (index2 === 'description' || index2 === 'name') ? 'col-table-2': `col-table-3`"
           >{{item}}</td>
           <td class="col-table-acoes">
             <button @click="editar(dados)" class="btn btn-black">

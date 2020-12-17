@@ -1,11 +1,9 @@
 <template>
-  <ul
-    v-if="this.login"
-    :class="`sidebar-menu-link ${this.menuActive ? '' : 'visibled'}`">
+  <ul v-if="this.login" :class="`sidebar-menu-link ${this.menuActive ? '' : 'visibled'}`">
     <li>
       <router-link to="/">
         <i class="fas fa-home"></i>
-        <p
+        <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Dashboard
         </p>
       </router-link>
@@ -13,7 +11,7 @@
     <li>
       <router-link to="/">
         <i class="far fa-credit-card"></i>
-        <p
+        <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Receitas
         </p>
       </router-link>
@@ -21,7 +19,7 @@
     <li>
       <router-link to="/">
         <i class="fas fa-credit-card"></i>
-        <p
+        <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Despesa
         </p>
       </router-link>
@@ -29,7 +27,7 @@
     <li>
       <router-link to="/metas">
         <i class="fas fa-chart-line"></i>
-        <p
+        <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Metas
         </p>
       </router-link>

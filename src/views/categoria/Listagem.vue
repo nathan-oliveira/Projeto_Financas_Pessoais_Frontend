@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="listagens">
     <div class="tabela" v-if="!$store.state.loading">
       <Table
         :postsLength="this.$store.state.posts.length"
@@ -10,12 +10,13 @@
       />
     </div>
     <PaginaCarregando key="Carregando" v-else />
-  </section>
+  </div>
 </template>
 
 <script>
 import api from "@/services";
 import Table from "@/components/layouts/table/table.vue";
+import { paginate } from '@/helpers';
 
 export default {
   name: "categoriaListagem",
@@ -40,15 +41,10 @@ export default {
         this.$store.commit("UPDATE_LOADING", false);
       });
     },
-    paginate() {
-      const from = this.$store.state.page * this.$store.state.perPage - this.$store.state.perPage;
-      const to = this.$store.state.page * this.$store.state.perPage;
-      return this.$store.state.posts.slice(from, to);
-    },
   },
   computed: {
     displayedList() {
-      return this.paginate();
+      return paginate(this.$store.state);
     },
   },
   created() {

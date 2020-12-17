@@ -60,6 +60,11 @@ const routes = [
         name: 'listagemMetas',
         component: () => import('../views/metas/Listagem.vue'),
       },
+      {
+        path: 'cadastrar',
+        name: 'cadastrarMetas',
+        component: () => import('../views/metas/Cadastrar.vue'),
+      },
     ],
   },
   {

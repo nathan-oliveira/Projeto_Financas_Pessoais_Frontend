@@ -9,11 +9,4 @@ export default {
 
     context.commit('UPDATE_PAGES', arrayPages);
   },
-  paginate() {
-    const from = this.state.page * this.state.perPage - this.state.perPage;
-    const to = this.state.page * this.state.perPage;
-    const postList = this.state.posts.slice(from, to);
-
-    return postList;
-  },
 };

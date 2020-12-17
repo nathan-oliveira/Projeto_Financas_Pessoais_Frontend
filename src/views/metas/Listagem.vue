@@ -1,63 +1,57 @@
 <template>
   <section>
     <div class="tabela" v-if="!$store.state.loading">
-      <h1>teste</h1>
+      <Table
+        :postsLength="this.$store.state.posts.length"
+        route="cadastrarCategoria"
+        :colunas="tableCols"
+        :displayedList="displayedList"
+        :url="urls"
+      />
     </div>
     <PaginaCarregando key="Carregando" v-else />
   </section>
 </template>
 
 <script>
-// import Paginacao from "@/components/layouts/paginacao/paginacao.vue";
 import api from "@/services";
+import Table from "@/components/layouts/table/table.vue";
+import { paginate, numeroPreco } from '@/helpers';
 
 export default {
   name: "metasListagem",
   components: {
-    // Paginacao,
+    Table,
   },
   data() {
     return {
-      posts: [],
-      page: 1,
-      perPage: 9,
-      pages: [],
+      tableCols: ["Código", "Descrição", "Tipo", "Valor", "Ações"],
+      urls: ["goal", "metas"]
     };
   },
-  created() {
-    this.$store.commit("UPDATE_LOADING", true);
-    this.getPosts();
-  },
   methods: {
-    // Methods Pagination
     getPosts() {
       api.get("/goal").then((resp) => {
-        this.posts = resp.data;
-        // console.log(this.posts);
+        Object.keys(resp.data).forEach((item) => {
+          resp.data[item].money = numeroPreco(resp.data[item].money);
+          delete resp.data[item].created_at;
+          delete resp.data[item].updated_at;
+        });
+
+        this.$store.commit('UPDATE_POSTS', resp.data);
+        this.$store.dispatch("setPages");
         this.$store.commit("UPDATE_LOADING", false);
       });
-    },
-    setPages() {
-      const numberOfPages = Math.ceil(this.posts.length / this.perPage);
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
-      }
-    },
-    paginate(posts) {
-      const from = this.page * this.perPage - this.perPage;
-      const to = this.page * this.perPage;
-      return posts.slice(from, to);
     },
   },
   computed: {
     displayedList() {
-      return this.paginate(this.posts);
+      return paginate(this.$store.state);
     },
   },
-  watch: {
-    posts() {
-      this.setPages();
-    },
+  created() {
+    this.$store.commit("UPDATE_LOADING", true);
+    this.getPosts();
   },
 };
 </script>
