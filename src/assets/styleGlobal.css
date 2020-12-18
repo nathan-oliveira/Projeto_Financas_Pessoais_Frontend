@@ -157,6 +157,14 @@ ul li {
   outline: none;
 }
 
+.form-group select {
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 10px;
+}
+
 .form-group input:hover, .form-group input:focus, 
 .form-group textarea:hover, .form-group textarea:focus,
 .form-group select:hover, .form-group select:focus {
@@ -178,7 +186,7 @@ ul li {
   }
 }
 
-.col-12 {
+.form-row {
   display: flex;
   flex-wrap: wrap-reverse;
 }
@@ -199,6 +207,10 @@ ul li {
 }
 
 .col-6 {
+  width: 49%;
+}
+
+.col-12 {
   width: 100%;
 }
 

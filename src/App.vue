@@ -1,7 +1,7 @@
 <template>
   <div :class="$store.state.login ?
     ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
-    <SideBar />
+    <SideBar v-if="this.$store.state.login" />
     <NavBar>
       <transition mode="out-in">
         <router-view />

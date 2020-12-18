@@ -1,7 +1,6 @@
 <template>
   <div
     class="sidebar"
-    v-if="this.$store.state.login"
     @mouseover="actionMenu"
     @mouseout="actionMenu"
   >

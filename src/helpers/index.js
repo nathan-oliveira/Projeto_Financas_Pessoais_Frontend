@@ -44,6 +44,66 @@ export function numeroPreco(valor) {
   return "";
 }
 
+export function soNumeros(v) {
+  return v.replace(/\D/g, "");
+}
+
+export function telefone(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/^(\d\d)(\d)/g, "($1) $2");
+  v = v.replace(/(\d{4})(\d)/, "$1 - $2");
+  return v;
+}
+
+export function cpf(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  return v;
+}
+
+export function cep(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/(\d{2})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d{1,3})$/, "$1-$2");
+  return v;
+}
+
+export function cnpj(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+  v = v.replace(/^(\d{2}).(\d{3})(\d)/, "$1.$2.$3");
+  v = v.replace(/.(\d{3})(\d)/, ".$1/$2");
+  v = v.replace(/(\d{4})(\d)/, "$1-$2");
+  return v;
+}
+
+export function data(v) {
+  v = v.replace(/\D/g, "");
+  v = v.replace(/^(\d{2})(\d)/, "$1/$2");
+  v = v.replace(/.(\d{2})(\d)/, ".$1/$2");
+  v = v.replace(/(\d{2})(\d)/, "$1/$2");
+  return v;
+}
+
+export function formatMoney(v) {
+  v = v.replace(/\D/g, '');
+  v = (v / 100).toFixed(2);
+  v = v.replace(".", ",");
+  v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+  v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
+
+  return v;
+}
+
+export function revertMoney(v) {
+  v = v.replaceAll('.', "");
+  v = v.replaceAll(',', ".");
+
+  return v;
+}
+
 export const swalDeleteQuestion = {
   title: "Você tem certeza?",
   text: "Não poderá reverter á operação!",

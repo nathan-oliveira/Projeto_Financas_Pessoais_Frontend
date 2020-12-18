@@ -4,14 +4,14 @@
       <BreadcrumbItem titulo="Minha Conta" asset="Informações de Usuário" />
     </Breadcrumb>
     <div class="grid" v-if="!$store.state.loading">
-      <div class="col-1">
+      <div class="imagem">
         <img
           src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png"
           width="200px"
         />
         <p>Atualizar Imagem</p>
       </div>
-      <div class="col-2">
+      <div class="formulario">
         <Form>
           <button class="btn" @click.prevent="updated">Atualizar</button>
         </Form>
@@ -75,15 +75,15 @@ img {
   width: 100%;
 }
 
-.col-1 {
+.imagem {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.col-1 img {
+.imagem img {
   border-radius: 10px 10px 0 0;
 }
-.col-1 p {
+.imagem p {
   font-size: 21px;
   margin-top: -5.8px;
   background: #f2f2f2;
@@ -91,7 +91,7 @@ img {
 }
 
 @media screen and (min-width: 740px) {
-  .col-2 {
+  .formulario {
     margin-top: -5px;
   }
 }

@@ -40,8 +40,7 @@ export default {
   },
   methods: {
     alterBread(value) {
-      const bread = document.getElementById("metasBreadcrumbItem");
-      bread.innerText = value;
+      document.getElementById("metasBreadcrumbItem").innerText = value;
     },
   },
 };

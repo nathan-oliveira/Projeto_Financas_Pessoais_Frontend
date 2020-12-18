@@ -25,3 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 https://www.digitalocean.com/community/tutorials/vuejs-vue-sweetalert2
+https://wildermuth.com/2019/05/05/Using-an-InputMask-with-Vue-(e-g-The-Vue-Ecosystem)

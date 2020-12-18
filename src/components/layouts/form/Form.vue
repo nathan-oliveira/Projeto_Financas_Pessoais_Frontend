@@ -7,7 +7,8 @@
       <input
         type="text"
         placeholder="Nome"
-        v-model="name"
+        v-model.trim="name"
+        maxlength="200"
       />
     </div>
     <div class="form-group">
@@ -15,7 +16,8 @@
       <input
         type="text"
         placeholder="E-mail"
-        v-model="email"
+        v-model.trim="email"
+        maxlength="200"
       />
     </div>
     <div class="form-group">
@@ -23,7 +25,8 @@
       <input
         type="password"
         placeholder="Senha"
-        v-model="password"
+        v-model.trim="password"
+        maxlength="200"
       />
     </div>
     <div class="form-group" v-if="$store.state.formActive || $store.state.login">
@@ -31,7 +34,8 @@
       <input
         type="password"
         placeholder="Confirmar Senha"
-        v-model="password_confirmation"
+        v-model.trim="password_confirmation"
+        maxlength="200"
       />
     </div>
     <div :class="`form-button${$store.state.login ? ' updated' : ''}`">
@@ -42,15 +46,9 @@
 
 <script>
 import { mapFields } from "@/helpers";
-import MensagemErro from "@/components/layouts/MensagemErro.vue";
-import MensagemSuccess from "@/components/layouts/MensagemSuccess.vue";
 
 export default {
   name: "Form",
-  components: {
-    MensagemErro,
-    MensagemSuccess,
-  },
   computed: {
     ...mapFields({
       fields: [

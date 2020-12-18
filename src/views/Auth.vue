@@ -42,15 +42,11 @@ export default {
       this.$store.commit("UPDATE_FORMACTIVE", !this.$store.state.formActive);
     },
     authentication() {
+      const { usuario } = this.$store.state;
+
       this.$store
         .dispatch("authentication", {
-          usuario: {
-            name: this.$store.state.usuario.name,
-            email: this.$store.state.usuario.email,
-            password: this.$store.state.usuario.password,
-            password_confirmation: this.$store.state.usuario
-              .password_confirmation,
-          },
+          usuario,
           router: this.$router,
         })
         .catch((err) => {

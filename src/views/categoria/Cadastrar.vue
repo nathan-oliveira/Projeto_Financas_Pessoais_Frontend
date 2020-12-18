@@ -1,13 +1,14 @@
 <template>
   <form class="form">
     <MensagemErro />
-    <div class="col-12">
+    <div class="form-row">
       <div class="form-group col-3 col-right">
         <label>Descrição:</label>
         <input
           type="text"
           placeholder="Descrição da categoria"
-          v-model="categoria.name"
+          v-model.trim="categoria.name"
+          maxlength="200"
         />
       </div>
       <div class="form-group col-7">
@@ -15,7 +16,8 @@
         <input
           type="text"
           placeholder="URL do icone"
-          v-model="categoria.icon"
+          v-model.trim="categoria.icon"
+          maxlength="200"
         />
       </div>
     </div>
@@ -26,14 +28,10 @@
 </template>
 
 <script>
-import MensagemErro from "@/components/layouts/MensagemErro.vue";
 import api from "@/services";
 
 export default {
   name: "categoriaCadastrar",
-  components: {
-    MensagemErro,
-  },
   data() {
     return {
       categoria: {
@@ -52,13 +50,7 @@ export default {
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
-          if (err.response.data.message) {
-            this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
-          } else {
-            this.$store.commit("UPDATE_ERROS", [
-              "Categoria e Icone deve conter no mínimo 6 caracteres.",
-            ]);
-          }
+          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
           setTimeout(() => {
             this.$store.commit("UPDATE_ERROS", []);

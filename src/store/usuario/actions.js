@@ -25,9 +25,9 @@ export default {
             password: undefined,
             password_confirmation: undefined,
           });
+
           context.commit("UPDATE_LOGIN", true);
           payload.router.push({ name: "home" });
-          context.commit("UPDATE_FORMACTIVE", true);
         }
 
         context.commit("UPDATE_FORMACTIVE", false);

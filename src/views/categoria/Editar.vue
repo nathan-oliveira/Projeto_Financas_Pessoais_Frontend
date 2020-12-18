@@ -1,41 +1,40 @@
 <template>
-  <form class="form" v-if="registro">
+  <div class="formulario">
     <MensagemErro />
-    <div class="col-12">
-      <div class="form-group col-3 col-right">
-        <label>Descrição:</label>
-        <input
-          type="text"
-          placeholder="Descrição da Categoria"
-          v-model="categoria.name"
-        />
+    <form class="form" v-if="registro">
+      <div class="form-row">
+        <div class="form-group col-3 col-right">
+          <label>Descrição:</label>
+          <input
+            type="text"
+            placeholder="Descrição da Categoria"
+            v-model.trim="categoria.name"
+            maxlength="200"
+          />
+        </div>
+        <div class="form-group col-7">
+          <label>Icone:</label>
+          <input
+            type="text"
+            placeholder="URL do icone"
+            v-model.trim="categoria.icon"
+            maxlength="200"
+          />
+        </div>
       </div>
-      <div class="form-group col-7">
-        <label>Icone:</label>
-        <input
-          type="text"
-          placeholder="URL do icone"
-          v-model="categoria.icon"
-        />
+      <div class="form-button">
+        <button class="btn" @click.prevent="atualizarCategoria"
+        id="atualizar">Atualizar</button>
       </div>
-    </div>
-    <div class="form-button">
-      <button class="btn" @click.prevent="atualizarCategoria"
-      id="atualizar">Atualizar</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
-import MensagemErro from "@/components/layouts/MensagemErro.vue";
 import api from "@/services";
 
 export default {
   name: "categoriaEditar",
-  props: ["id"],
-  components: {
-    MensagemErro,
-  },
   data() {
     return {
       registro: false,
@@ -49,8 +48,7 @@ export default {
     this.buscarCategoria();
   },
   mounted() {
-    const bread = document.getElementById("categoriaBreadcrumbItem");
-    bread.innerText = 'Editar';
+    document.getElementById("categoriaBreadcrumbItem").innerText = 'Editar';
   },
   methods: {
     buscarCategoria() {
@@ -78,13 +76,8 @@ export default {
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
-          if (err.response.data.message) {
-            this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
-          } else {
-            this.$store.commit("UPDATE_ERROS", [
-              "Categoria e Icone deve conter no mínimo 6 caracteres.",
-            ]);
-          }
+
+          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
           setTimeout(() => {
             this.$store.commit("UPDATE_ERROS", []);

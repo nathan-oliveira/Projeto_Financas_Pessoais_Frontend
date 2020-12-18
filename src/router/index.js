@@ -65,6 +65,11 @@ const routes = [
         name: 'cadastrarMetas',
         component: () => import('../views/metas/Cadastrar.vue'),
       },
+      {
+        path: 'editar/:id',
+        name: 'editarMetas',
+        component: () => import('../views/metas/Editar.vue'),
+      }
     ],
   },
   {
