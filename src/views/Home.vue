@@ -81,8 +81,8 @@ export default {
         },
       ],
       graficosAnual: [
-         {
-          name: "Total de Receitas",
+        {
+          name: "Total de Despesas",
           data: [
             { label: 'Janeiro', value: 8 },
             { label: 'Fevereiro', value: 10 },
@@ -99,7 +99,7 @@ export default {
           ]
         },
         {
-          name: "Total de Despesas",
+          name: "Total de Receitas",
           data: [
             { label: 'Janeiro', value: 5 },
             { label: 'Fevereiro', value: 14 },
