@@ -186,7 +186,8 @@ ul li {
   }
 }
 
-.form-row {
+.form-row,
+.row {
   display: flex;
   flex-wrap: wrap-reverse;
 }

@@ -4,56 +4,44 @@
       <BreadcrumbItem titulo="Dashboard" asset="Painel de Controle" />
     </Breadcrumb>
     <div class="card-financeiros">
-      <div class="card">
-        <div class="card-body card-receita">
-          <div class="card-info">
-            <h1 class="card-title">R$: 20.000,21</h1>
-            <p class="card-subtitle">18/12/2020</p>
-          </div>
-          <div class="card-logo">
-            <i class="fas fa-donate"></i>
-          </div>
-        </div>
-        <div class="card-footer card-receita-footer">
-          <p class="card-footer-title">Receita</p>
-          <i class="fa fa-arrow-circle-right"></i>
-        </div>
+      <CardDashboard
+        refe="receita"
+        money="R$: 20.000,21"
+        date="18/12/2020"
+      />
+      <CardDashboard
+        refe="despesa"
+        money="R$: 20.000,21"
+        date="18/12/2020"
+      />
+      <CardDashboard
+        refe="total"
+        money="R$: 20.000,21"
+        date="18/12/2020"
+      />
+    </div>
+    <div class="row">
+      <div class="col-6 chart-12 bar-chart">
+        <bar-chart
+          :data="graficosAnual"
+          label-rotate
+        />
       </div>
-      <div class="card">
-        <div class="card-body card-despesa">
-          <div class="card-info">
-            <h1 class="card-title">R$: 20.000,21</h1>
-            <p class="card-subtitle">18/12/2020</p>
-          </div>
-          <div class="card-logo">
-            <i class="fas fa-donate"></i>
-          </div>
-        </div>
-        <div class="card-footer card-despesa-footer">
-          <p class="card-footer-title">Despesa</p>
-          <i class="fa fa-arrow-circle-right"></i>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-right bar-chart">
+        <bar-chart :data="graficosComMetas" />
       </div>
-      <div class="card">
-        <div class="card-body card-total">
-          <div class="card-info">
-            <h1 class="card-title">R$: 20.000,21</h1>
-            <p class="card-subtitle">18/12/2020</p>
-          </div>
-          <div class="card-logo">
-            <i class="fas fa-donate"></i>
-          </div>
-        </div>
-        <div class="card-footer card-total-footer">
-          <p class="card-footer-title">Total</p>
-          <i class="fa fa-arrow-circle-right"></i>
-        </div>
+      <div class="col-6 bar-chart">
+        <p>Receitas vs Despesas</p>
+        <pie-chart :data="graficosReceitasDespesas" />
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import CardDashboard from "@/components/dashboard/card/card.vue";
 import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
 import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 
@@ -62,83 +50,100 @@ export default {
   components: {
     Breadcrumb,
     BreadcrumbItem,
+    CardDashboard,
+  },
+  data() {
+    return {
+      graficosComMetas: [
+        {
+          name: "Meta financeira",
+          data: [
+            { label: "2018", value: 290 },
+            { label: "2019", value: 600 }
+          ]
+        },
+        {
+          name: "Saldo Total",
+          data: [
+            { label: "2018", value: 340 },
+            { label: "2019", value: 673 }
+          ]
+        }
+      ],
+      graficosReceitasDespesas: [
+        {
+          name: 'Despesas',
+          value: 30,
+        },
+        {
+          name: 'Receitas',
+          value: 15,
+        },
+      ],
+      graficosAnual: [
+         {
+          name: "Total de Receitas",
+          data: [
+            { label: 'Janeiro', value: 8 },
+            { label: 'Fevereiro', value: 10 },
+            { label: 'Março', value: 12 },
+            { label: 'Abril', value: 7 },
+            { label: 'Maio', value: 9 },
+            { label: 'Junho', value: 16 },
+            { label: 'Julho', value: 15 },
+            { label: 'Agosto', value: 18 },
+            { label: 'Setembro', value: 20 },
+            { label: 'Outubro', value: 5 },
+            { label: 'Novembro', value: 9 },
+            { label: 'Dezembro', value: 9 },
+          ]
+        },
+        {
+          name: "Total de Despesas",
+          data: [
+            { label: 'Janeiro', value: 5 },
+            { label: 'Fevereiro', value: 14 },
+            { label: 'Março', value: 8 },
+            { label: 'Abril', value: 4 },
+            { label: 'Maio', value: 4 },
+            { label: 'Junho', value: 5 },
+            { label: 'Julho', value: 20 },
+            { label: 'Agosto', value: 10 },
+            { label: 'Setembro', value: 11 },
+            { label: 'Outubro', value: 3 },
+            { label: 'Novembro', value: 4 },
+            { label: 'Dezembro', value: 5 },
+          ]
+        }
+      ],
+    };
   },
 };
 </script>
 
 <style scoped>
-.card {
-  width: 32%;
+.bar-chart {
+  height: 400px;
+  margin-top: 10px;
 }
 
-.card-financeiros,
-.card-receita,
-.card-despesa,
-.card-total {
+.chart-12 {
+  width: 99%;
+}
+
+.bar-chart p {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: -2px;
+  color: #a2a2a2;
+}
+
+.card-financeiros {
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #a2a2a22e;
+
   display: flex;
   justify-content: space-between;
-}
-
-.card-body {
-  padding: 15px 10px;
-}
-
-.card-receita {
-  background-color: #00c0ef !important;
-}
-
-.card-despesa {
-  background-color: #dd4b39 !important;
-}
-
-.card-total {
-  background-color: #00a65a !important;
-}
-
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-footer i {
-  color: rgb(255 255 255 / 50%);
-}
-
-.card-receita-footer {
-  background: #00a7d0;
-}
-
-.card-despesa-footer {
-  background: #c54535;
-}
-
-.card-total-footer {
-  background: #009651;
-}
-
-.card-footer-title {
-  color: #fff;
-  padding: 2px 0;
-  margin: 0 5px;
-}
-
-.card-logo i {
-  font-size: 5em;
-  color: rgba(0,0,0,0.15);
-}
-
-/* .card-footer-title i */
-
-.card-title {
-  font-size: 1.9em;
-  font-weight: bold;
-  color: #fff;
-}
-
-.card-subtitle {
-  margin-top: 10px;
-  font-size: .8em;
-  color: #fff;
 }
 </style>
