@@ -1,6 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import home from "./home";
+import categoria from "./categoria";
+import metas from "./metas";
+import authentication from "./authentication";
+import perfil from "./perfil";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -8,77 +14,11 @@ const routes = [
     path: '*',
     component: () => import('../views/PaginaNaoEncontrada.vue'),
   },
-  {
-    path: '/',
-    name: 'home',
-    meta: {
-      login: true,
-    },
-    component: () => import('../views/Home.vue'),
-  },
-  {
-    path: '/authentication',
-    name: 'authentication',
-    meta: {
-      access: true,
-    },
-    component: () => import('../views/Auth.vue'),
-  },
-  {
-    path: '/categoria',
-    component: () => import('../views/categoria/Categoria.vue'),
-    meta: {
-      login: true,
-    },
-    children: [
-      {
-        path: '',
-        name: 'listagemCategoria',
-        component: () => import('../views/categoria/Listagem.vue'),
-      },
-      {
-        path: 'cadastrar',
-        name: 'cadastrarCategoria',
-        component: () => import('../views/categoria/Cadastrar.vue'),
-      },
-      {
-        path: 'editar/:id',
-        name: 'editarCategoria',
-        component: () => import('../views/categoria/Editar.vue'),
-      }
-    ],
-  },
-  {
-    path: '/metas',
-    component: () => import('../views/metas/Metas.vue'),
-    meta: {
-      login: true,
-    },
-    children: [
-      {
-        path: '',
-        name: 'listagemMetas',
-        component: () => import('../views/metas/Listagem.vue'),
-      },
-      {
-        path: 'cadastrar',
-        name: 'cadastrarMetas',
-        component: () => import('../views/metas/Cadastrar.vue'),
-      },
-      {
-        path: 'editar/:id',
-        name: 'editarMetas',
-        component: () => import('../views/metas/Editar.vue'),
-      }
-    ],
-  },
-  {
-    path: '/minha-conta',
-    component: () => import('../views/perfil/Perfil.vue'),
-    meta: {
-      login: true,
-    },
-  },
+  home,
+  authentication,
+  categoria,
+  metas,
+  perfil,
 ];
 
 const router = new VueRouter({
