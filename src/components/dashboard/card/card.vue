@@ -10,8 +10,8 @@
       </div>
     </div>
     <div :class="`card-footer card-${refe}-footer`">
-      <p class="card-footer-title">{{ refe[0].toUpperCase() + refe.slice(1).toLowerCase() }}</p>
       <i class="fa fa-arrow-circle-right"></i>
+      <p class="card-footer-title">{{ refe[0].toUpperCase() + refe.slice(1).toLowerCase() }}</p>
     </div>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
 
 <style scoped>
 .card {
-  width: 32%;
+  flex: 1 1 10%;
+  margin: 10px;
 }
 
 .card-receita,
@@ -85,7 +86,7 @@ export default {
 }
 
 .card-title {
-  font-size: 1.9em;
+  font-size: 1.8em;
   font-weight: bold;
   color: #fff;
 }

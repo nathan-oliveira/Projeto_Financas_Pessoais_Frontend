@@ -6,6 +6,7 @@
       <transition mode="out-in">
         <router-view />
       </transition>
+      <Footer />
     </NavBar>
   </div>
 </template>
@@ -14,12 +15,14 @@
 import api from "@/services";
 import NavBar from "@/components/layouts/nav/NavBar.vue";
 import SideBar from "@/components/layouts/nav/SideBar.vue";
+import Footer from "@/components/layouts/footer/Footer.vue";
 
 export default {
   name: "App",
   components: {
     NavBar,
     SideBar,
+    Footer
   },
   beforeCreate() {
     if (window.localStorage.token) {

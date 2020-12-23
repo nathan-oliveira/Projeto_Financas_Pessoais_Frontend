@@ -61,7 +61,9 @@ export default {
   },
   methods: {
     actionMenu() {
-      this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
+      if (window.innerWidth < 740) {
+        this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
+      }
     },
   },
 };

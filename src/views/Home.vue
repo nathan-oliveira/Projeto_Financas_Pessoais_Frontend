@@ -20,7 +20,7 @@
         date="18/12/2020"
       />
     </div>
-    <div class="row">
+    <div class="row border-top">
       <div class="col-6 chart-12 bar-chart">
         <bar-chart
           :data="graficosAnual"
@@ -139,11 +139,14 @@ export default {
 }
 
 .card-financeiros {
-  padding-bottom: 30px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #a2a2a22e;
-
+  padding-bottom: 15px;
+  margin: 0 -10px;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.border-top {
+  border-top: 1px solid #a2a2a22e;
+  padding-top: 5px;
 }
 </style>
