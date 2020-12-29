@@ -6,6 +6,7 @@ import categoria from "./categoria";
 import metas from "./metas";
 import authentication from "./authentication";
 import perfil from "./perfil";
+import receita from "./receita";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,7 @@ const routes = [
   categoria,
   metas,
   perfil,
+  receita,
 ];
 
 const router = new VueRouter({

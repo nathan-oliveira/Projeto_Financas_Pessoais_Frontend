@@ -9,7 +9,7 @@
       </router-link>
     </li>
     <li>
-      <router-link to="/">
+      <router-link to="/receita">
         <i class="far fa-credit-card"></i>
         <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Receitas
@@ -20,7 +20,7 @@
       <router-link to="/">
         <i class="fas fa-credit-card"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Despesa
+          :class="`${this.menuActive ? '' : 'offscreen'}`">Despesas
         </p>
       </router-link>
     </li>
