@@ -7,8 +7,8 @@
           <label>Descrição:</label>
           <input
             type="text"
-            v-model.trim="metas.description"
-            placeholder="Descrição da meta"
+            v-model.trim="receita.description"
+            placeholder="Descrição da receita"
             maxlength="200"
           />
         </div>
@@ -19,22 +19,26 @@
           <input
             type="text"
             placeholder="R$: 0,00"
-            v-model.trim="metas.money"
+            v-model.trim="receita.money"
             maxlength="7"
             @keyup="formatMoney"
           />
         </div>
         <div class="form-group col-6">
-          <label>Tipo:</label>
-          <select v-model.trim="metas.types">
+          <label>Categoria:</label>
+          <select v-model.trim="receita.categoryId">
             <option value="" selected hidden disabled>Selecione...</option>
-            <option value="receita">Receita</option>
-            <option value="despesa">Despesa</option>
+            <option
+              v-for="item in categoria"
+              :key="item.id"
+              :value="item.id">
+              {{ item.name }}
+            </option>
           </select>
         </div>
       </div>
       <div class="form-button">
-        <button class="btn" @click.prevent="adicionarMetas">Atualizar</button>
+        <button class="btn" @click.prevent="adicionarFinanceiro">Atualizar</button>
       </div>
     </form>
   </div>
@@ -45,60 +49,79 @@ import { formatMoney, revertMoney } from "@/helpers";
 import api from "@/services";
 
 export default {
-  name: "metasEditar",
+  name: "editar",
   data() {
     return {
       registro: false,
-      metas: {
+      receita: {
         description: "",
         types: "",
-        money: ""
+        money: "",
+        categoryId: ""
       },
+      categoria: {},
     };
   },
-  created() {
-    this.buscarMetas();
-  },
   mounted() {
-    document.getElementById("metasBreadcrumbItem").innerText = 'Editar';
+    document.getElementById(`${this.$route.meta.types}BreadcrumbItem`).innerText = 'Editar';
+  },
+  created() {
+    this.getCategory();
+    this.getBusiness();
   },
   methods: {
     formatMoney() {
-      this.metas.money = formatMoney(this.metas.money);
+      this.receita.money = formatMoney(this.receita.money);
     },
-    buscarMetas() {
-      api.get(`/goal/${this.$route.params.id}`)
+    getCategory() {
+      api.get('/category').then((resp) => {
+        Object.keys(resp.data).forEach((item) => {
+          delete resp.data[item].icon;
+        });
+
+        this.categoria = resp.data;
+      });
+    },
+    getBusiness() {
+      api.get(`/business/${this.$route.params.id}`)
         .then((resp) => {
           this.registro = true;
-          this.metas.description = resp.data[0].description;
-          this.metas.types = resp.data[0].types;
-          this.metas.money = formatMoney(resp.data[0].money);
+          this.receita.description = resp.data[0].description;
+          this.receita.types = resp.data[0].types;
+          this.receita.money = formatMoney(resp.data[0].money);
+          this.receita.categoryId = resp.data[0].categoryId.id;
         })
         .catch((err) => {
           this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
+          const refe = this.$route.meta.types;
+          const redirect = refe[0].toUpperCase() + refe.slice(1).toLowerCase();
+
           setTimeout(() => {
             this.$store.commit("UPDATE_ERROS", []);
-            this.$router.push("/metas");
+            this.$router.push({ name: `listagem${redirect}` });
           }, 3000);
         });
     },
-    adicionarMetas(event) {
+    adicionarFinanceiro(event) {
       event.target.classList.toggle("disabled");
 
       const data = {
-        description: this.metas.description,
-        types: this.metas.types,
-        money: revertMoney(this.metas.money),
+        description: this.receita.description,
+        types: this.receita.types,
+        money: revertMoney(this.receita.money),
+        categoryId: this.receita.categoryId,
       };
 
-      api.put(`/goal/${this.$route.params.id}`, data)
+      api.put(`/business/${this.$route.params.id}`, data)
         .then(() => {
-          this.$router.push({ name: "listagemMetas" });
+          const refe = this.$route.meta.types;
+          const redirect = refe[0].toUpperCase() + refe.slice(1).toLowerCase();
+
+          this.$router.push({ name: `listagem${redirect}` });
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
-
           this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
 
           setTimeout(() => {

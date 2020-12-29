@@ -25,22 +25,28 @@ export default {
   },
   data() {
     return {
-      tableCols: ["Código", "Descrição", "Tipo", "Valor", "Ações"],
-      urls: ["business", "receita"]
+      tableCols: ["Código", "Descrição", "Categoria", "Valor", "Ações"],
+      urls: ["business"]
     };
   },
   methods: {
     getPosts() {
       api.get("/business").then((resp) => {
+        const data = [];
         Object.keys(resp.data).forEach((item) => {
-          resp.data[item].money = numeroPreco(resp.data[item].money);
+          if (resp.data[item].types === this.$route.meta.types) {
+            resp.data[item].money = numeroPreco(resp.data[item].money);
+            resp.data[item].types = resp.data[item].categoryId.name;
 
-          delete resp.data[item].created_at;
-          delete resp.data[item].updated_at;
-          // delete resp.data[item].types;
+            delete resp.data[item].created_at;
+            delete resp.data[item].updated_at;
+            delete resp.data[item].categoryId;
+
+            data.push(resp.data[item]);
+          }
         });
 
-        this.$store.commit('UPDATE_POSTS', resp.data);
+        this.$store.commit('UPDATE_POSTS', data);
         this.$store.dispatch("setPages");
         this.$store.commit("UPDATE_LOADING", false);
       });
@@ -52,6 +58,7 @@ export default {
     },
   },
   created() {
+    this.urls.push(this.$route.meta.types);
     this.$store.commit("UPDATE_LOADING", true);
     this.getPosts();
   },

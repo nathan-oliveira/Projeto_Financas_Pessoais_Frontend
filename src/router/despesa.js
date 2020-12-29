@@ -1,33 +1,33 @@
 export default {
-  path: '/receita',
-  component: () => import('../views/financeiro/Receita.vue'),
+  path: '/despesa',
+  component: () => import('../views/financeiro/Despesa.vue'),
   meta: {
     login: true,
-    types: "receita",
+    types: "despesa",
   },
   children: [
     {
       path: '',
-      name: 'listagemReceita',
+      name: 'listagemDespesa',
       component: () => import('../views/financeiro/Listagem.vue'),
       meta: {
-        types: "receita",
+        types: "despesa",
       }
     },
     {
       path: 'cadastrar',
-      name: 'cadastrarReceita',
+      name: 'cadastrarDespesa',
       component: () => import('../views/financeiro/Cadastrar.vue'),
       meta: {
-        types: "receita",
+        types: "despesa",
       }
     },
     {
       path: 'editar/:id',
-      name: 'editarReceita',
+      name: 'editarDespesa',
       component: () => import('../views/financeiro/Editar.vue'),
       meta: {
-        types: "receita",
+        types: "despesa",
       }
     }
   ]

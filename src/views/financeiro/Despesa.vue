@@ -1,18 +1,18 @@
 <template>
   <section class="content">
     <Breadcrumb>
-      <BreadcrumbItem titulo="Receitas" id="receitaBreadcrumbItem" />
+      <BreadcrumbItem titulo="Despesas" id="despesaBreadcrumbItem" />
     </Breadcrumb>
     <div class="grid">
       <nav class="menu-pages">
-         <router-link
-          :to="{ name: 'listagemReceita' }"
+        <router-link
+          :to="{ name: 'listagemDespesa' }"
           @click.native="alterBread('Listagens')"
         >
           Listar
         </router-link>
         <router-link
-          :to="{ name: 'cadastrarReceita' }"
+          :to="{ name: 'cadastrarDespesa' }"
           @click.native="alterBread('Cadastrar')"
         >
           Cadastrar
@@ -30,7 +30,7 @@ import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
 import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 
 export default {
-  name: "Receita",
+  name: "Financeiro",
   components: {
     Breadcrumb,
     BreadcrumbItem,
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     alterBread(value) {
-      document.getElementById("receitaBreadcrumbItem").innerText = value;
+      document.getElementById("despesaBreadcrumbItem").innerText = value;
     },
   },
 };

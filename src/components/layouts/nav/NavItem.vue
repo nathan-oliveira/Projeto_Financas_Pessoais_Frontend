@@ -17,7 +17,7 @@
       </router-link>
     </li>
     <li>
-      <router-link to="/">
+      <router-link to="/despesa">
         <i class="fas fa-credit-card"></i>
         <p @click="actionMenu"
           :class="`${this.menuActive ? '' : 'offscreen'}`">Despesas

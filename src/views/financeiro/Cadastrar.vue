@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="form-button">
-      <button class="btn" @click.prevent="adicionarReceita">Cadastrar</button>
+      <button class="btn" @click.prevent="adicionar">Cadastrar</button>
     </div>
   </form>
 </template>
@@ -52,7 +52,7 @@ export default {
     return {
       receita: {
         description: "",
-        types: "receita",
+        types: "",
         money: "",
         categoryId: ""
       },
@@ -60,6 +60,7 @@ export default {
     };
   },
   created() {
+    this.receita.types = this.$route.meta.types;
     this.getCategory();
   },
   methods: {
@@ -73,10 +74,9 @@ export default {
         });
 
         this.categoria = resp.data;
-        console.log(this.categoria);
       });
     },
-    adicionarReceita(event) {
+    adicionar(event) {
       event.target.classList.toggle("disabled");
 
       const data = {
@@ -88,7 +88,10 @@ export default {
 
       api.post("/business", data)
         .then(() => {
-          this.$router.push({ name: "listagemReceita" });
+          const refe = this.$route.meta.types;
+          const redirect = refe[0].toUpperCase() + refe.slice(1).toLowerCase();
+
+          this.$router.push({ name: `listagem${redirect}` });
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
