@@ -18,6 +18,9 @@ export default {
         if (resp.data.token) {
           localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
+          context.commit("UPDATE_LOGIN", true);
+          payload.router.push({ name: "home" });
+
           context.commit("UPDATE_USUARIO", {
             name: resp.data.name,
             email: resp.data.email,
@@ -25,9 +28,6 @@ export default {
             password: undefined,
             password_confirmation: undefined,
           });
-
-          context.commit("UPDATE_LOGIN", true);
-          payload.router.push({ name: "home" });
         }
 
         context.commit("UPDATE_FORMACTIVE", false);
@@ -35,6 +35,7 @@ export default {
       });
   },
   deslogarUsuario(context) {
+    context.commit("UPDATE_LOGIN", false);
     context.commit("UPDATE_FORMACTIVE", false);
     context.commit("UPDATE_USUARIO", {
       name: "",
@@ -43,7 +44,6 @@ export default {
       password: undefined,
       password_confirmation: undefined,
     });
-    context.commit("UPDATE_LOGIN", false);
 
     window.localStorage.removeItem("token");
   },

@@ -1,13 +1,15 @@
 <template>
-  <div :class="$store.state.login ?
-    ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
-    <SideBar v-if="this.$store.state.login" />
-    <NavBar>
-      <transition mode="out-in">
-        <router-view />
-      </transition>
-      <Footer />
-    </NavBar>
+  <div>
+    <div :class="$store.state.login ?
+      ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
+      <SideBar v-if="this.$store.state.login" />
+      <NavBar>
+        <transition mode="out-in">
+          <router-view />
+        </transition>
+        <Footer v-if="this.$store.state.login" />
+      </NavBar>
+    </div>
   </div>
 </template>
 
@@ -24,24 +26,32 @@ export default {
     SideBar,
     Footer
   },
-  beforeCreate() {
+  created() {
     if (window.localStorage.token) {
       api.validateToken()
         .then(() => {
           this.$store.dispatch("getUsuario")
             .then((resp) => {
               this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+            })
+            .catch(() => {
+              this.deslogar();
             });
         })
         .catch(() => {
-          this.$store.dispatch("deslogarUsuario");
-          window.localStorage.removeItem("token");
-          this.$router.push("/authentication");
+          this.deslogar();
         });
     } else {
-      this.$store.dispatch("deslogarUsuario");
+      this.deslogar();
     }
   },
+  methods: {
+    deslogar() {
+      this.$router.push("/authentication");
+      this.$store.dispatch("deslogarUsuario");
+      window.localStorage.removeItem("token");
+    }
+  }
 };
 </script>
 
