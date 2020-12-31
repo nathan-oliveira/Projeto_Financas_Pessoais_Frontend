@@ -57,7 +57,7 @@ export default {
   align-items: center;
 }
 
-@media screen and (max-width: 435px) {
+@media screen and (max-width: 600px) {
   .navigation {
     display: block;
     text-align: center;
