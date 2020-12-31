@@ -3,7 +3,7 @@
     <div class="tabela" v-if="!$store.state.loading">
       <Table
         :postsLength="this.$store.state.posts.length"
-        route="cadastrarReceita"
+        :route="this.$route.meta.types === 'receita' ? 'cadastrarReceita' : 'cadastrarDespesa'"
         :colunas="tableCols"
         :displayedList="displayedList"
         :url="urls"
@@ -16,12 +16,12 @@
 <script>
 import api from "@/services";
 import Table from "@/components/layouts/table/table.vue";
-import { paginate, numeroPreco } from '@/helpers';
+import { paginate, numeroPreco } from "@/helpers";
 
 export default {
   name: "receitaListagem",
   components: {
-    Table,
+    Table
   },
   data() {
     return {
@@ -31,9 +31,9 @@ export default {
   },
   methods: {
     getPosts() {
-      api.get("/business").then((resp) => {
+      api.get("/business").then(async (resp) => {
         const data = [];
-        Object.keys(resp.data).forEach((item) => {
+        await Object.keys(resp.data).forEach((item) => {
           if (resp.data[item].types === this.$route.meta.types) {
             resp.data[item].money = numeroPreco(resp.data[item].money);
             resp.data[item].types = resp.data[item].categoryId.name;
@@ -46,22 +46,22 @@ export default {
           }
         });
 
-        this.$store.commit('UPDATE_POSTS', data);
-        this.$store.dispatch("setPages");
-        this.$store.commit("UPDATE_LOADING", false);
+        await this.$store.commit("UPDATE_POSTS", data);
+        await this.$store.dispatch("setPages");
+        await this.$store.commit("UPDATE_LOADING", false);
       });
     }
   },
   computed: {
     displayedList() {
       return paginate(this.$store.state);
-    },
+    }
   },
   created() {
     this.urls.push(this.$route.meta.types);
     this.$store.commit("UPDATE_LOADING", true);
     this.getPosts();
-  },
+  }
 };
 </script>
 

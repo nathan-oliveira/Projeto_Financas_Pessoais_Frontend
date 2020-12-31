@@ -143,9 +143,7 @@ ul li {
   margin-bottom: 6px;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+.form-group input, .form-group textarea, .form-group select {
   border-radius: 4px;
   border: 1px solid #e4e4e4;
   padding: 13px;
@@ -165,16 +163,14 @@ ul li {
   background-position-y: 10px;
 }
 
-.form-group input:hover, .form-group input:focus, 
-.form-group textarea:hover, .form-group textarea:focus,
-.form-group select:hover, .form-group select:focus {
+.form-group input:hover, .form-group input:focus, .form-group textarea:hover, .form-group textarea:focus, .form-group select:hover, .form-group select:focus {
   outline: none;
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.1);
   border-color: #87f;
 }
 
 .form-group select option:hover {
-	color: #EC6F66;
+  color: #EC6F66;
 }
 
 @media screen and (max-width: 518px) {
@@ -186,8 +182,7 @@ ul li {
   }
 }
 
-.form-row,
-.row {
+.form-row, .row {
   display: flex;
   flex-wrap: wrap-reverse;
 }
@@ -195,6 +190,7 @@ ul li {
 .col-right {
   margin-right: 2%;
 }
+
 .col-2 {
   width: 49%;
 }
@@ -222,15 +218,12 @@ ul li {
   .col-2 {
     width: 100%;
   }
-  
   .col-3 {
     width: 100%;
   }
-  
   .col-7 {
     width: 100%;
   }
-  
   .col-6 {
     width: 100%;
   }
@@ -239,6 +232,7 @@ ul li {
 /*
 
 */
+
 /* Table & Pagination*/
 
 table {
@@ -274,13 +268,7 @@ table thead th {
 
 .col-table-acoes {
   text-align: center;
-  width: 11%
-}
-
-@media screen and (max-width: 1229px) {
-  .col-table-acoes {
-    width: 14%
-  }
+  width: 14%
 }
 
 @media screen and (max-width: 1058px) {
@@ -293,7 +281,6 @@ table thead th {
   .col-table-acoes {
     width: 25%;
   }
-
   .col-table-1 {
     display: none;
   }
@@ -303,7 +290,6 @@ table thead th {
   .col-table-1, .col-table-3, .col-table-4 {
     display: none;
   }
-  
   .col-table-acoes {
     width: 38%;
   }
@@ -417,6 +403,7 @@ table thead th {
 }
 
 /* menu-pages */
+
 .menu-pages a {
   padding: 10px 20px;
   display: block;
@@ -426,8 +413,7 @@ table thead th {
   color: rgb(7, 0, 0);
 }
 
-.menu-pages a.router-link-exact-active,
-.menu-pages a:hover {
+.menu-pages a.router-link-exact-active, .menu-pages a:hover {
   background: linear-gradient(90deg, #271181 40%, #87f 100%);
   color: white;
   border: none;

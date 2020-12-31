@@ -79,12 +79,15 @@ export function cnpj(v) {
   return v;
 }
 
-export function data(v) {
-  v = v.replace(/\D/g, "");
-  v = v.replace(/^(\d{2})(\d)/, "$1/$2");
-  v = v.replace(/.(\d{2})(\d)/, ".$1/$2");
-  v = v.replace(/(\d{2})(\d)/, "$1/$2");
-  return v;
+export function dataAtualFormatada() {
+  const data = new Date();
+  const dia = data.getDate().toString();
+  const diaF = (dia.length === 1) ? `0${dia}` : dia;
+  const mes = (data.getMonth() + 1).toString();
+  const mesF = (mes.length === 1) ? `0${mes}` : mes;
+  const anoF = data.getFullYear();
+
+  return `${diaF}/${mesF}/${anoF}`;
 }
 
 export function formatMoney(v) {

@@ -11,7 +11,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(dados, index) in displayedList" :key="index">
+        <tr v-for="(dados, index) in
+          (this.$store.state.posts.length > 1) ? displayedList :
+            this.$store.state.posts" :key="index">
           <td
             v-for="(item, index2) in dados"
             :key="item.id"

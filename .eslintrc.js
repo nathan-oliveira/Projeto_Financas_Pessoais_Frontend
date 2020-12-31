@@ -22,6 +22,7 @@ module.exports = {
     'no-tabs': 'off',
     'indent': 'off',
     'linebreak-style': 'off',
-    'comma-dangle': 'off'
+    'comma-dangle': 'off',
+    'object-shorthand': 'off',
   },
 };

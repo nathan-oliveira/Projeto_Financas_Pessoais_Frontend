@@ -3,7 +3,7 @@
     <div class="tabela" v-if="!$store.state.loading">
       <Table
         :postsLength="this.$store.state.posts.length"
-        route="cadastrarCategoria"
+        route="cadastrarMetas"
         :colunas="tableCols"
         :displayedList="displayedList"
         :url="urls"

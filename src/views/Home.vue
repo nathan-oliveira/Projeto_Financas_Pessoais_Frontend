@@ -6,24 +6,21 @@
     <div class="card-financeiros">
       <CardDashboard
         refe="receita"
-        money="R$: 20.000,21"
-        date="18/12/2020"
+        :money="receita.valor"
+        :date="dataAtual"
       />
       <CardDashboard
         refe="despesa"
-        money="R$: 20.000,21"
-        date="18/12/2020"
+        :money="despesa.valor"
+        :date="dataAtual"
       />
       <CardDashboard
         refe="total"
-        money="R$: 20.000,21"
-        date="18/12/2020"
+        :money="total.valor"
+        :date="dataAtual"
       />
     </div>
     <div class="row border-top">
-      <GraficosAnual />
-    </div>
-    <div class="row">
       <GraficosComMetas />
       <GraficosReceitasDespesas />
     </div>
@@ -31,10 +28,13 @@
 </template>
 
 <script>
+import api from "@/services";
+import { numeroPreco, dataAtualFormatada } from "@/helpers";
+
 import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
 import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 import CardDashboard from "@/components/dashboard/card/card.vue";
-import GraficosAnual from "@/components/dashboard/graficos/graficosAnual.vue";
+// import GraficosAnual from "@/components/dashboard/graficos/graficosAnual.vue";
 import GraficosComMetas from "@/components/dashboard/graficos/graficosComMetas.vue";
 import GraficosReceitasDespesas from "@/components/dashboard/graficos/graficosReceitasDespesas.vue";
 
@@ -44,10 +44,60 @@ export default {
     Breadcrumb,
     BreadcrumbItem,
     CardDashboard,
-    GraficosAnual,
+    // GraficosAnual,
     GraficosComMetas,
     GraficosReceitasDespesas,
   },
+  data() {
+    return {
+      receita: {
+        valor: "R$ 0,00",
+      },
+      despesa: {
+        valor: "R$ 0,00",
+      },
+      total: {
+        valor: "R$: 0,00",
+      },
+      dataAtual: "",
+    };
+  },
+  created() {
+    this.getFinanceiro('receita');
+    this.getFinanceiro('despesa');
+    this.getDate();
+  },
+  methods: {
+    getFinanceiro(action) {
+      let valorReceita = 0;
+      let valorDespesa = 0;
+
+      api.get("/business").then((resp) => {
+        Object.keys(resp.data).forEach((item) => {
+          if (resp.data[item].types === 'receita') {
+            valorReceita += parseFloat((resp.data[item].money));
+          }
+
+          if (resp.data[item].types === 'despesa') {
+            valorDespesa += parseFloat((resp.data[item].money));
+          }
+        });
+
+        if (action === 'receita') {
+          this.receita.valor = numeroPreco(valorReceita);
+        }
+
+        if (action === 'despesa') {
+          this.despesa.valor = numeroPreco(valorDespesa);
+        }
+
+        this.total.valor = numeroPreco(valorReceita - valorDespesa);
+      });
+    },
+    getDate() {
+      this.dataAtual = dataAtualFormatada();
+    }
+  }
 };
 </script>
 
