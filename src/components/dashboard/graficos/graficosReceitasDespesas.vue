@@ -1,27 +1,22 @@
 <template>
   <div class="col-6 bar-chart">
     <p>Receitas vs Despesas</p>
-    <pie-chart :data="graficosReceitasDespesas" />
+    <pie-chart :data="dados" />
   </div>
 </template>
 
 <script>
 export default {
   name: "graficosReceitasDespesas",
+  props: ["graficosReceitasDespesas"],
   data() {
     return {
-      graficosReceitasDespesas: [
-        {
-          name: 'Despesas',
-          value: 30,
-        },
-        {
-          name: 'Receitas',
-          value: 15,
-        },
+      dados: [
+        this.graficosReceitasDespesas.receita,
+        this.graficosReceitasDespesas.despesa,
       ],
     };
-  }
+  },
 };
 </script>
 

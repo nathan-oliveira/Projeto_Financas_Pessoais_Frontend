@@ -6,23 +6,23 @@
     <div class="card-financeiros">
       <CardDashboard
         refe="receita"
-        :money="receita.valor"
+        :money="cards.receita.valor"
         :date="dataAtual"
       />
       <CardDashboard
         refe="despesa"
-        :money="despesa.valor"
+        :money="cards.despesa.valor"
         :date="dataAtual"
       />
       <CardDashboard
         refe="total"
-        :money="total.valor"
+        :money="cards.total.valor"
         :date="dataAtual"
       />
     </div>
     <div class="row border-top">
       <GraficosComMetas />
-      <GraficosReceitasDespesas />
+      <GraficosReceitasDespesas :graficosReceitasDespesas="graficosReceitasDespesas" />
     </div>
   </section>
 </template>
@@ -50,22 +50,41 @@ export default {
   },
   data() {
     return {
-      receita: {
-        valor: "R$ 0,00",
-      },
-      despesa: {
-        valor: "R$ 0,00",
-      },
-      total: {
-        valor: "R$: 0,00",
+      cards: {
+        receita: {
+          valor: "R$ 0,00",
+        },
+        despesa: {
+          valor: "R$ 0,00",
+        },
+        total: {
+          valor: "R$: 0,00",
+        },
       },
       dataAtual: "",
+      graficosReceitasDespesas: {
+        despesa: {
+          name: 'Despesas',
+          value: 90,
+        },
+        receita: {
+          name: 'Receitas',
+          value: 50,
+        }
+      },
     };
+  },
+  beforeCreate() {
+    if (!window.localStorage.token) {
+      this.$router.push("/authentication");
+      this.$store.dispatch("deslogarUsuario");
+    }
   },
   created() {
     this.getFinanceiro('receita');
     this.getFinanceiro('despesa');
     this.getDate();
+    console.log(this.graficosReceitasDespesas);
   },
   methods: {
     getFinanceiro(action) {
@@ -84,14 +103,16 @@ export default {
         });
 
         if (action === 'receita') {
-          this.receita.valor = numeroPreco(valorReceita);
+          this.cards.receita.valor = numeroPreco(valorReceita);
+          this.graficosReceitasDespesas.receita.value = valorReceita;
         }
 
         if (action === 'despesa') {
-          this.despesa.valor = numeroPreco(valorDespesa);
+          this.cards.despesa.valor = numeroPreco(valorDespesa);
+          this.graficosReceitasDespesas.despesa.value = valorDespesa;
         }
 
-        this.total.valor = numeroPreco(valorReceita - valorDespesa);
+        this.cards.total.valor = numeroPreco(valorReceita - valorDespesa);
       });
     },
     getDate() {
