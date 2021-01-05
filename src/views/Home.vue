@@ -21,7 +21,7 @@
       />
     </div>
     <div class="row border-top">
-      <GraficosComMetas />
+      <GraficosComMetas :graficosComMetas="graficosComMetas" />
       <GraficosReceitasDespesas :graficosReceitasDespesas="graficosReceitasDespesas" />
     </div>
   </section>
@@ -72,6 +72,16 @@ export default {
           value: 50,
         }
       },
+      graficosComMetas: {
+        metas: {
+          label: "Total de Meta",
+          value: 0
+        },
+        total: {
+          label: "Saldo Atual",
+          value: 0
+        }
+      }
     };
   },
   beforeCreate() {
@@ -83,8 +93,8 @@ export default {
   created() {
     this.getFinanceiro('receita');
     this.getFinanceiro('despesa');
+    this.getMetas();
     this.getDate();
-    console.log(this.graficosReceitasDespesas);
   },
   methods: {
     getFinanceiro(action) {
@@ -113,6 +123,19 @@ export default {
         }
 
         this.cards.total.valor = numeroPreco(valorReceita - valorDespesa);
+        this.graficosComMetas.total.value = valorReceita - valorDespesa;
+        // this.graficosComMetas.metas.value
+      });
+    },
+    getMetas() {
+      api.get("/goal").then((resp) => {
+        let valorMetas = 0;
+
+        Object.keys(resp.data).forEach((item) => {
+          valorMetas += parseFloat((resp.data[item].money));
+        });
+
+        this.graficosComMetas.metas.value = valorMetas;
       });
     },
     getDate() {

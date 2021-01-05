@@ -2,7 +2,7 @@
   <form class="form">
     <MensagemErro />
     <div class="form-row">
-      <div class="form-group col-3 col-right">
+      <div class="form-group col-4 col-right">
         <label>Descrição:</label>
         <input
           type="text"
@@ -11,7 +11,7 @@
           maxlength="200"
         />
       </div>
-      <div class="form-group col-7">
+      <div class="form-group col-8">
         <label>Icone:</label>
         <input
           type="text"

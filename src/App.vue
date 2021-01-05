@@ -7,7 +7,7 @@
         <transition mode="out-in">
           <router-view />
         </transition>
-        <Footer v-if="!$store.state.loading" />
+        <Footer />
       </NavBar>
     </div>
   </div>

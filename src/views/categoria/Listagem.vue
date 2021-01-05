@@ -31,6 +31,8 @@ export default {
   },
   methods: {
     getPosts() {
+      this.$store.commit("UPDATE_LOADING", true);
+
       api.get("/category").then((resp) => {
         Object.keys(resp.data).forEach((item) => {
           delete resp.data[item].icon;

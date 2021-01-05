@@ -31,6 +31,8 @@ export default {
   },
   methods: {
     getPosts() {
+      this.$store.commit("UPDATE_LOADING", true);
+
       api.get("/business").then(async (resp) => {
         const data = [];
         await Object.keys(resp.data).forEach((item) => {

@@ -1,29 +1,23 @@
 <template>
   <div class="col-6 col-right bar-chart">
-    <bar-chart :data="graficosComMetas" />
+    <p>Meta vs Total</p>
+    <bar-chart :data="dados" />
   </div>
 </template>
 
 <script>
 export default {
   name: "graficosComMetas",
+  props: ["graficosComMetas"],
   data() {
     return {
-      graficosComMetas: [
+      dados: [
         {
-          name: "Meta financeira",
           data: [
-            { label: "2018", value: 290 },
-            { label: "2019", value: 600 }
+            this.graficosComMetas.metas,
+            this.graficosComMetas.total,
           ]
         },
-        {
-          name: "Saldo Total",
-          data: [
-            { label: "2018", value: 340 },
-            { label: "2019", value: 673 }
-          ]
-        }
       ],
     };
   }
@@ -34,5 +28,12 @@ export default {
 .bar-chart {
   height: 400px;
   margin-top: 10px;
+}
+
+.bar-chart p {
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: -2px;
+  color: #a2a2a2;
 }
 </style>

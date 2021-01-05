@@ -31,6 +31,8 @@ export default {
   },
   methods: {
     getPosts() {
+      this.$store.commit("UPDATE_LOADING", true);
+
       api.get("/goal").then((resp) => {
         Object.keys(resp.data).forEach((item) => {
           resp.data[item].money = numeroPreco(resp.data[item].money);
