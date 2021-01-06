@@ -87,7 +87,6 @@ export default {
   beforeCreate() {
     if (!window.localStorage.token) {
       this.$router.push("/authentication");
-      this.$store.dispatch("deslogarUsuario");
     }
   },
   created() {
