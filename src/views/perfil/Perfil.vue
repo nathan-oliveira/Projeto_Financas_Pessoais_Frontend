@@ -24,11 +24,11 @@
 </template>
 
 <script>
+import api from "@/services";
 import Form from "@/components/layouts/form/Form.vue";
 import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
 import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
 import { swalUpdateOk } from "@/helpers";
-import api from "@/services";
 
 export default {
   name: "Perfil",
