@@ -6,10 +6,12 @@
     <div class="grid" v-if="!$store.state.loading">
       <div class="imagem">
         <img
-          src="https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png"
+          :src="fotoPerfil"
           width="200px"
         />
-        <p>Atualizar Imagem</p>
+        <p @click.prevent="openModal">
+          <i data-v-2a5f3f11="" class="fas fa-edit"></i> Atualizar Imagem
+        </p>
       </div>
       <div class="formulario">
         <Form>
@@ -25,6 +27,8 @@
 import Form from "@/components/layouts/form/Form.vue";
 import Breadcrumb from "@/components/layouts/breadcrumb/Breadcrumb.vue";
 import BreadcrumbItem from "@/components/layouts/breadcrumb/BreadcrumbItem.vue";
+import { swalUpdateOk } from "@/helpers";
+import api from "@/services";
 
 export default {
   name: "Perfil",
@@ -32,6 +36,11 @@ export default {
     Breadcrumb,
     BreadcrumbItem,
     Form,
+  },
+  computed: {
+    fotoPerfil() {
+      return this.$store.state.usuario.foto;
+    }
   },
   created() {
     this.$store.commit("UPDATE_LOADING", true);
@@ -67,6 +76,33 @@ export default {
           }, 3000);
         });
     },
+    async openModal() {
+      const { value: foto } = await this.$swal.fire({
+        input: 'url',
+        inputLabel: 'Alterar imagem de perfil',
+        inputPlaceholder: 'URL da imagem',
+        allowOutsideClick: false,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Salvar",
+      });
+
+      if (foto) {
+        api.patch("/profile", { foto })
+          .then((resp) => {
+            this.$store.commit('UPDATE_USUARIO', {
+              name: resp.data.name,
+              email: resp.data.email,
+              nivel: resp.data.nivel,
+              foto: resp.data.foto
+            });
+
+            this.$swal(swalUpdateOk);
+          });
+      }
+    }
   },
 };
 </script>
@@ -83,12 +119,17 @@ img {
 
 .imagem img {
   border-radius: 10px 10px 0 0;
+  box-shadow: 0px 0px 9px 0px rgba(50, 50, 50, 0.45);
+
 }
 .imagem p {
-  font-size: 21px;
+  font-size: 17px;
+  padding: 5px;
   margin-top: -5.8px;
   background: #f2f2f2;
   border-radius: 0 0 10px 10px;
+  cursor: pointer;
+  box-shadow: 0px 0px 9px 0px rgba(50, 50, 50, 0.45);
 }
 
 @media screen and (min-width: 740px) {

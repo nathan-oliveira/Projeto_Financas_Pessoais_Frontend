@@ -16,6 +16,7 @@ export default {
     }, this.state.formActive)
       .then((resp) => {
         if (resp.data.token) {
+          const urlFoto = resp.data.foto ? resp.data.foto : 'https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png';
           localStorage.setItem("token", `Bearer ${resp.data.token}`);
 
           context.commit("UPDATE_LOGIN", true);
@@ -25,6 +26,7 @@ export default {
             name: resp.data.name,
             email: resp.data.email,
             nivel: resp.data.nivel,
+            foto: urlFoto,
             password: undefined,
             password_confirmation: undefined,
           });
@@ -41,6 +43,7 @@ export default {
       name: "",
       email: "",
       nivel: "",
+      foto: "",
       password: undefined,
       password_confirmation: undefined,
     });

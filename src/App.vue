@@ -32,7 +32,13 @@ export default {
         .then(() => {
           this.$store.dispatch("getUsuario")
             .then((resp) => {
-              this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
+              const urlFoto = resp.data.foto ? resp.data.foto : 'https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png';
+              this.$store.commit('UPDATE_USUARIO', {
+                name: resp.data.name,
+                email: resp.data.email,
+                nivel: resp.data.nivel,
+                foto: urlFoto
+              });
             })
             .catch(() => {
               this.$store.dispatch("deslogarUsuario");

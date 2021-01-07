@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const urlApi = 'https://deploy-financeiro-heroku.herokuapp.com/api';
+// const urlApi = 'http://localhost:3000/api';
+
 const axiosInstance = axios.create({
-  baseURL: 'https://deploy-financeiro-heroku.herokuapp.com/api',
+  baseURL: urlApi,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -28,14 +31,17 @@ const api = {
   put(endpoint, body) {
     return axiosInstance.put(endpoint, body);
   },
+  patch(endpoint, body) {
+    return axiosInstance.patch(endpoint, body);
+  },
   validateToken() {
-    return axiosInstance.post('https://deploy-financeiro-heroku.herokuapp.com/api/validarToken');
+    return axiosInstance.post(`${urlApi}/validarToken`);
   },
   login(body, active) {
     if (active) {
-      return axios.post('https://deploy-financeiro-heroku.herokuapp.com/api/users', body);
+      return axios.post(`${urlApi}/users`, body);
     }
-    return axios.post('https://deploy-financeiro-heroku.herokuapp.com/api/session', body);
+    return axios.post(`${urlApi}/session`, body);
   },
 };
 

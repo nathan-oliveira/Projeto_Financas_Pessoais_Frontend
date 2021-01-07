@@ -125,3 +125,11 @@ export const swalDeleteOk = {
   showConfirmButton: false,
   timer: 1500,
 };
+
+export const swalUpdateOk = {
+  title: "Atualizado!",
+  text: "Operação realizado com sucesso!",
+  icon: "success",
+  showConfirmButton: false,
+  timer: 1500,
+};
