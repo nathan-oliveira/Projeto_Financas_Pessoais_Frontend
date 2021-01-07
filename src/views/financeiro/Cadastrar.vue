@@ -7,7 +7,7 @@
         <input
           type="text"
           v-model.trim="receita.description"
-          placeholder="Descrição da receita"
+          placeholder="Descrição"
           maxlength="200"
         />
       </div>

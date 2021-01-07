@@ -11,7 +11,12 @@
     </div>
     <div :class="`card-footer card-${refe}-footer`">
       <i class="fa fa-arrow-circle-right"></i>
-      <p class="card-footer-title">{{ refe[0].toUpperCase() + refe.slice(1).toLowerCase() }}</p>
+      <p class="card-footer-title">
+        {{
+          refe === 'total' ? 'Saldo Atual' :
+          refe[0].toUpperCase() + refe.slice(1).toLowerCase()
+        }}
+      </p>
     </div>
   </div>
 </template>
@@ -19,7 +24,7 @@
 <script>
 export default {
   name: "card",
-  props: ["refe", "money", "date"]
+  props: ["refe", "money", "date"],
 };
 </script>
 

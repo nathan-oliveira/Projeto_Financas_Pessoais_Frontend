@@ -50,6 +50,7 @@ export default {
             email: resp.data.email,
             nivel: resp.data.nivel,
           });
+
           this.$store.commit("UPDATE_SUCCESS", [
             "Perfil atualizado com sucesso!",
           ]);

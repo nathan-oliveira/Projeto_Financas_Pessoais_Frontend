@@ -195,11 +195,11 @@ ul li {
   width: 49%;
 }
 
-.col-3 {
+.col-4 {
   width: 29%;
 }
 
-.col-7 {
+.col-8 {
   width: 69%;
 }
 
@@ -215,26 +215,25 @@ ul li {
   .col-right {
     margin-right: 0%;
   }
+
   .col-2 {
     width: 100%;
   }
-  .col-3 {
+
+  .col-4 {
     width: 100%;
   }
-  .col-7 {
+
+  .col-8 {
     width: 100%;
   }
+
   .col-6 {
     width: 100%;
   }
 }
 
-/*
-
-*/
-
 /* Table & Pagination*/
-
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;

@@ -7,7 +7,7 @@
         <transition mode="out-in">
           <router-view />
         </transition>
-        <Footer v-if="!$store.state.loading" />
+        <Footer />
       </NavBar>
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
     SideBar,
     Footer
   },
-  created() {
+  beforeCreate() {
     if (window.localStorage.token) {
       api.validateToken()
         .then(() => {
@@ -35,23 +35,21 @@ export default {
               this.$store.commit('UPDATE_USUARIO', { name: resp.data.name, email: resp.data.email, nivel: resp.data.nivel });
             })
             .catch(() => {
-              this.deslogar();
+              this.$store.dispatch("deslogarUsuario");
+              this.$router.push("/authentication");
+              window.localStorage.removeItem("token");
             });
         })
         .catch(() => {
-          this.deslogar();
+          this.$store.dispatch("deslogarUsuario");
+          this.$router.push("/authentication");
+          window.localStorage.removeItem("token");
         });
     } else {
-      this.deslogar();
+      this.$store.dispatch("deslogarUsuario");
+      this.$router.push("/authentication");
     }
   },
-  methods: {
-    deslogar() {
-      this.$router.push("/authentication");
-      this.$store.dispatch("deslogarUsuario");
-      window.localStorage.removeItem("token");
-    }
-  }
 };
 </script>
 
