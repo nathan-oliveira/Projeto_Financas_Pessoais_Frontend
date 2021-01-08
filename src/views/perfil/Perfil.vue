@@ -58,6 +58,7 @@ export default {
             name: resp.data.name,
             email: resp.data.email,
             nivel: resp.data.nivel,
+            foto: this.$store.state.usuario.foto
           });
 
           this.$store.commit("UPDATE_SUCCESS", [
