@@ -41,19 +41,19 @@ export default {
               });
             })
             .catch(() => {
-              this.$store.dispatch("deslogarUsuario");
               this.$router.push("/authentication");
+              this.$store.dispatch("deslogarUsuario");
               window.localStorage.removeItem("token");
             });
         })
         .catch(() => {
-          this.$store.dispatch("deslogarUsuario");
           this.$router.push("/authentication");
+          this.$store.dispatch("deslogarUsuario");
           window.localStorage.removeItem("token");
         });
     } else {
-      this.$store.dispatch("deslogarUsuario");
       this.$router.push("/authentication");
+      this.$store.dispatch("deslogarUsuario");
     }
   },
 };
