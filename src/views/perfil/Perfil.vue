@@ -119,7 +119,7 @@ img {
 
 .imagem img {
   border-radius: 10px 10px 0 0;
-  box-shadow: 0px 0px 9px 0px rgba(50, 50, 50, 0.45);
+  box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.45);
 
 }
 .imagem p {
@@ -129,7 +129,7 @@ img {
   background: #f2f2f2;
   border-radius: 0 0 10px 10px;
   cursor: pointer;
-  box-shadow: 0px 0px 9px 0px rgba(50, 50, 50, 0.45);
+  box-shadow: 0px 0px 2px 0px rgba(50, 50, 50, 0.45);
 }
 
 @media screen and (min-width: 740px) {
