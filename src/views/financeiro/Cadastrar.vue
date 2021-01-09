@@ -95,11 +95,7 @@ export default {
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
-          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
-
-          setTimeout(() => {
-            this.$store.commit("UPDATE_ERROS", []);
-          }, 3000);
+          this.$store.dispatch("setError", [err.response.data.message]);
         });
     }
   },

@@ -1,12 +1,10 @@
 <template>
-  <!-- <transition mode="out-in"> -->
-    <div class="footer">
-      <div class="container">
-        <p class="copyright"><b>Copyright © 2020 Financeiro.</b> Todos os direitos reservados.</p>
-        <p class="version"><b>Versão 1.0</b></p>
-      </div>
+  <div class="footer">
+    <div class="container">
+      <p class="copyright"><b>Copyright © 2020 Financeiro.</b> Todos os direitos reservados.</p>
+      <p class="version"><b>Versão 1.0</b></p>
     </div>
-  <!-- </transition> -->
+  </div>
 </template>
 
 <script>

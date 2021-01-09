@@ -41,8 +41,6 @@ export default {
 .sidebar {
   padding: 18px 20px;
   background: linear-gradient(180deg, #271181 40%, #4723d9 100%);
-  /* background: linear-gradient(180deg, #4723d9 35%, #87f 100%); */
-  /* background: #4723d9; */
   border-right: 1px solid linear-gradient(180deg, #4723d9 35%, #87f 100%);
 }
 

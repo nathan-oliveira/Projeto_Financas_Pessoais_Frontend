@@ -61,20 +61,10 @@ export default {
             foto: this.$store.state.usuario.foto
           });
 
-          this.$store.commit("UPDATE_SUCCESS", [
-            "Perfil atualizado com sucesso!",
-          ]);
-
-          setTimeout(() => {
-            this.$store.commit("UPDATE_SUCCESS", []);
-          }, 3000);
+          this.$store.dispatch("setSuccess", ["Perfil atualizado com sucesso!"]);
         })
         .catch((err) => {
-          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
-
-          setTimeout(() => {
-            this.$store.commit("UPDATE_ERROS", []);
-          }, 3000);
+          this.$store.dispatch("setError", [err.response.data.message]);
         });
     },
     async openModal() {

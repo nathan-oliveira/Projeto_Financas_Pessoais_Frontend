@@ -92,13 +92,12 @@ export default {
           this.receita.categoryId = resp.data[0].categoryId.id;
         })
         .catch((err) => {
-          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
+          this.$store.dispatch("setError", [err.response.data.message]);
 
           const refe = this.$route.meta.types;
           const redirect = refe[0].toUpperCase() + refe.slice(1).toLowerCase();
 
           setTimeout(() => {
-            this.$store.commit("UPDATE_ERROS", []);
             this.$router.push({ name: `listagem${redirect}` });
           }, 3000);
         });
@@ -122,11 +121,7 @@ export default {
         })
         .catch((err) => {
           event.target.classList.toggle("disabled");
-          this.$store.commit("UPDATE_ERROS", [err.response.data.message]);
-
-          setTimeout(() => {
-            this.$store.commit("UPDATE_ERROS", []);
-          }, 3000);
+          this.$store.dispatch("setError", [err.response.data.message]);
         });
     }
   }

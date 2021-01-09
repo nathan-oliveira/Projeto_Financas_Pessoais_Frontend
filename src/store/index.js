@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { stateUsuario, mutationsUsuario, actionsUsuario } from './usuario';
-import { mutationsAlertas, stateAlertas } from './alertas';
-import { outrosMutations, outrosState } from './outros';
+import { mutationsAlertas, stateAlertas, actionsAlertas } from './alertas';
+import { outrosMutations, outrosState, } from './outros';
 import { tableState, mutationsTable, actionsTable } from './table';
 
 Vue.use(Vuex);
@@ -25,6 +25,7 @@ export default new Vuex.Store({
   actions: {
     ...actionsUsuario,
     ...actionsTable,
+    ...actionsAlertas,
   },
   modules: {
   },

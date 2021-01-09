@@ -1,7 +1,7 @@
 <template>
   <transition mode="out-in">
     <ul class="erros" v-if="errors.length > 0">
-      <p @click="close"></p>
+      <p class="close" @click="close"></p>
       <li v-for="(erro, index) in errors" :key="index" v-html="erro"></li>
     </ul>
   </transition>
@@ -38,20 +38,40 @@ export default {
   border-radius: 10px;
 }
 
-.erros p:after {
-  float: right;
-  content: "\274c";
-  font-size: 12px;
-  color: #721c24;
-  cursor: pointer;
-  margin-top: 4px;
-}
-
 .erros li {
   color: #721c24;
   text-align: center;
-  margin-bottom: 9px;
-  margin-top: -11px;
-  width: 90%;
+  padding: 7px 0;
+}
+
+.close {
+  cursor: pointer;
+  margin-top: 4px;
+  position: absolute;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #721c24;
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
 }
 </style>

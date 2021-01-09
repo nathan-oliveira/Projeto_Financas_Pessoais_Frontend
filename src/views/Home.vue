@@ -123,7 +123,6 @@ export default {
 
         this.cards.total.valor = numeroPreco(valorReceita - valorDespesa);
         this.graficosComMetas.total.value = valorReceita - valorDespesa;
-        // this.graficosComMetas.metas.value
       });
     },
     getMetas() {

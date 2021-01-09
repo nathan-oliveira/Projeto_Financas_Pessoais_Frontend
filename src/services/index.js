@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const urlApi = 'https://financeiro-app-nathan-oliveira.herokuapp.com/api';
-// const urlApi = 'http://localhost:3000/api';
+// const urlApi = 'https://financeiro-app-nathan-oliveira.herokuapp.com/api';
+const urlApi = 'http://localhost:3000/api';
 
 const axiosInstance = axios.create({
   baseURL: urlApi,
