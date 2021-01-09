@@ -29,7 +29,6 @@ export default {
 
 <style scoped>
 .erros {
-  display: flex;
   border: 1px solid #f5c6cb;
   flex-direction: column;
   margin: 10px 0;
@@ -47,11 +46,10 @@ export default {
 .close {
   cursor: pointer;
   margin-top: 4px;
-  position: absolute;
+  position: relative;
   right: 20px;
-  width: 32px;
-  height: 32px;
   opacity: 0.3;
+  float: right !important;
 }
 
 .close:hover {

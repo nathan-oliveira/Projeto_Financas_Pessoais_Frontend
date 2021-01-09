@@ -29,7 +29,6 @@ export default {
 
 <style scoped>
 .success {
-  display: flex;
   flex-direction: column;
   margin: 10px 0;
   padding: 0 8px;
@@ -47,11 +46,10 @@ export default {
 .close {
   cursor: pointer;
   margin-top: 4px;
-  position: absolute;
+  position: relative;
   right: 20px;
-  width: 32px;
-  height: 32px;
   opacity: 0.3;
+  float: right !important;
 }
 
 .close:hover {
