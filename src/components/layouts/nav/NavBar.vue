@@ -1,39 +1,34 @@
 <template>
-  <div>
-    <header :class="!$store.state.login ? 'menu' : 'menu bg-menu'">
-      <nav class="container">
-        <div class="menu-logo">
-          <a @click="actionMenu" v-if="$store.state.login">
-            <img src="@/assets/menu.svg" />
-          </a>
-          <span v-else>Financeiro</span>
-        </div>
-        <div class="menu-nav">
-          <ul v-if="$store.state.login">
-            <li>
-              <div class="dropdown">
-                <Dropdown :titulo="nomeUsuario">
-                  <router-link to="/minha-conta">Minha Conta</router-link>
-                  <a @click="deslogarUsuario">Sair</a>
-                </Dropdown>
-              </div>
-            </li>
-          </ul>
-          <ul v-else>
-            <li>
-              <router-link to="/authentication">Entrar / Cadastrar</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <nav class="menu-responsivo">
-        <NavItem />
-      </nav>
-    </header>
-    <main>
-      <slot></slot>
-    </main>
-  </div>
+  <header :class="!$store.state.login ? 'menu' : 'menu bg-menu'">
+    <nav class="container">
+      <div class="menu-logo">
+        <a @click="actionMenu" v-if="$store.state.login">
+          <img src="@/assets/menu.svg" />
+        </a>
+        <span v-else>Financeiro</span>
+      </div>
+      <div class="menu-nav">
+        <ul v-if="$store.state.login">
+          <li>
+            <div class="dropdown">
+              <Dropdown :titulo="nomeUsuario">
+                <router-link to="/minha-conta">Minha Conta</router-link>
+                <a @click="deslogarUsuario">Sair</a>
+              </Dropdown>
+            </div>
+          </li>
+        </ul>
+        <ul v-else>
+          <li>
+            <router-link to="/authentication">Entrar / Cadastrar</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav class="menu-responsivo">
+      <NavItem />
+    </nav>
+  </header>
 </template>
 
 <script>
@@ -62,8 +57,7 @@ export default {
       this.$store.commit("UPDATE_MENUACTIVE", !this.$store.state.menuActive);
     },
     deslogarUsuario() {
-      this.$store.dispatch("deslogarUsuario");
-      this.$router.push("/authentication");
+      this.$store.dispatch("deslogarUsuario", { router: this.$router });
     },
   },
 };

@@ -8,9 +8,7 @@
       <ul class="sidebar-menu-logo">
         <li>
           <router-link to="/">
-            FI<span :class="`${$store.state.menuActive ? '' : 'offscreen'}`"
-              >NANCEIRO</span
-            >
+            FI<span :class="`${$store.state.menuActive ? 'onscreen' : 'offscreen'}`">NANCEIRO</span>
           </router-link>
         </li>
       </ul>
@@ -40,13 +38,6 @@ export default {
 <style scoped>
 .sidebar {
   padding: 18px 20px;
-  background: linear-gradient(180deg, #271181 40%, #4723d9 100%);
-  border-right: 1px solid linear-gradient(180deg, #4723d9 35%, #87f 100%);
-}
-
-.offscreen {
-  display: none;
-  transition: all 0.3s;
 }
 
 .sidebar-menu-logo li a {

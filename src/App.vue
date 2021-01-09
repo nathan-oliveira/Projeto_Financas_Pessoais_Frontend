@@ -1,38 +1,36 @@
 <template>
-  <div>
-    <div :class="$store.state.login ?
-      ($store.state.menuActive ? 'content_web1' : 'content_web2') : 'content_web'">
-      <SideBar v-if="this.$store.state.login" />
-      <NavBar>
-        <transition mode="out-in">
-          <router-view />
-        </transition>
-        <Footer />
-      </NavBar>
-    </div>
+  <div :class="this.$store.state.login ? 'content_app': ''">
+    <Header />
+    <Main>
+      <transition mode="out-in">
+        <router-view />
+      </transition>
+      <Footer />
+    </Main>
   </div>
 </template>
 
 <script>
 import api from "@/services";
-import NavBar from "@/components/layouts/nav/NavBar.vue";
-import SideBar from "@/components/layouts/nav/SideBar.vue";
+import Header from "@/components/layouts/header/Header.vue";
+import Main from "@/components/layouts/main/Main.vue";
 import Footer from "@/components/layouts/footer/Footer.vue";
 
 export default {
   name: "App",
   components: {
-    NavBar,
-    SideBar,
+    Header,
+    Main,
     Footer
   },
   beforeCreate() {
-    if (window.localStorage.token) {
+    if (this.$store.state.login) {
       api.validateToken()
         .then(() => {
           this.$store.dispatch("getUsuario")
             .then((resp) => {
               const urlFoto = resp.data.foto ? resp.data.foto : 'https://www.auctus.com.br/wp-content/uploads/2017/09/sem-imagem-avatar.png';
+
               this.$store.commit('UPDATE_USUARIO', {
                 name: resp.data.name,
                 email: resp.data.email,
@@ -41,19 +39,14 @@ export default {
               });
             })
             .catch(() => {
-              this.$router.push("/authentication");
-              this.$store.dispatch("deslogarUsuario");
-              window.localStorage.removeItem("token");
+              this.$store.dispatch("deslogarUsuario", { router: this.$router });
             });
         })
         .catch(() => {
-          this.$router.push("/authentication");
-          this.$store.dispatch("deslogarUsuario");
-          window.localStorage.removeItem("token");
+          this.$store.dispatch("deslogarUsuario", { router: this.$router });
         });
     } else {
-      this.$router.push("/authentication");
-      this.$store.dispatch("deslogarUsuario");
+      this.$store.dispatch("deslogarUsuario", { router: this.$router });
     }
   },
 };

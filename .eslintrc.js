@@ -24,5 +24,6 @@ module.exports = {
     'linebreak-style': 'off',
     'comma-dangle': 'off',
     'object-shorthand': 'off',
+    'no-unneeded-ternary': 'off',
   },
 };

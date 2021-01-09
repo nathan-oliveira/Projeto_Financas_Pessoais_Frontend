@@ -13,6 +13,47 @@ body {
   box-sizing: border-box;
 }
 
+main {
+  z-index: 9999;
+}
+
+.content_app {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+}
+
+@media screen and (max-width: 739px) {
+  .aside,
+  .no-aside {
+    width: 0px !important;
+  }
+}
+
+.body {
+  z-index: 1;
+}
+
+.aside {
+  width: 200px;
+  background: linear-gradient(180deg, #271181 40%, #4723d9 100%);
+  transition: width 1s;
+}
+
+.no-aside {
+  width:60px;
+  transition: width 1s;
+  background: linear-gradient(180deg, #271181 40%, #4723d9 100%);
+}
+
+.offscreen {
+  color: transparent;
+  transition: 1s;
+}
+
+.onscreen {
+  transition: 1s;
+}
+
 .container {
   display: flex;
   margin: 0 auto;

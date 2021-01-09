@@ -36,7 +36,7 @@ export default {
         context.commit("UPDATE_LOADING", false);
       });
   },
-  deslogarUsuario(context) {
+  deslogarUsuario(context, payload) {
     context.commit("UPDATE_LOGIN", false);
     context.commit("UPDATE_FORMACTIVE", false);
     context.commit("UPDATE_USUARIO", {
@@ -49,5 +49,6 @@ export default {
     });
 
     window.localStorage.removeItem("token");
+    payload.router.push({ name: "authentication" });
   },
 };

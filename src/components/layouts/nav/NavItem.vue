@@ -4,7 +4,7 @@
       <router-link to="/">
         <i class="fas fa-home"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Dashboard
+          :class="`${this.menuActive ? 'onscreen' : 'offscreen'}`">Dashboard
         </p>
       </router-link>
     </li>
@@ -12,7 +12,7 @@
       <router-link to="/receita">
         <i class="far fa-credit-card"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Receitas
+          :class="`${this.menuActive ? 'onscreen' : 'offscreen'}`">Receitas
         </p>
       </router-link>
     </li>
@@ -20,7 +20,7 @@
       <router-link to="/despesa">
         <i class="fas fa-credit-card"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Despesas
+          :class="`${this.menuActive ? 'onscreen' : 'offscreen'}`">Despesas
         </p>
       </router-link>
     </li>
@@ -28,7 +28,7 @@
       <router-link to="/metas">
         <i class="fas fa-chart-line"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Metas
+          :class="`${this.menuActive ? 'onscreen' : 'offscreen'}`">Metas
         </p>
       </router-link>
     </li>
@@ -36,7 +36,7 @@
       <router-link to="/categoria">
         <i class="fas fa-plus-circle"></i>
         <p @click="actionMenu"
-          :class="`${this.menuActive ? '' : 'offscreen'}`">Categorias
+          :class="`${this.menuActive ? 'onscreen' : 'offscreen'}`">Categorias
         </p>
       </router-link>
     </li>
@@ -70,11 +70,6 @@ export default {
 </script>
 
 <style scoped>
-.offscreen {
-  display: none;
-  transition: all 0.3s;
-}
-
 .sidebar-menu-link li a {
   align-items: center;
   color: #f7f6fb !important;
