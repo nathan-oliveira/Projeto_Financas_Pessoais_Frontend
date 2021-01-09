@@ -26,7 +26,7 @@
       <div class="form-group col-6">
         <label>Tipo:</label>
         <select v-model.trim="metas.types">
-          <option value="" selected hidden disabled>Selecione...</option>
+          <option value="" selected hidden>Selecione...</option>
           <option value="receita">Receita</option>
           <option value="despesa">Despesa</option>
         </select>
