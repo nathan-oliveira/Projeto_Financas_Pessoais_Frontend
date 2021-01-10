@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "proxy": "http://localhost:4000",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -12,6 +11,7 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "dr-vue-echarts": "^1.0.14",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue-sweetalert2": "^4.1.1",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -31,5 +32,6 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
